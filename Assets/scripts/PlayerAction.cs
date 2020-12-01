@@ -2,17 +2,31 @@
 
 public class PlayerAction : MonoBehaviour
 {
-    private float sideSpeed = 10f;
-    void Update()
+    private float playerSpeed = 0.4f;
+    private Rigidbody2D rb;
+    
+    private Vector2 movementVector
     {
-        if (Input.GetKey(KeyCode.D))
+        get
         {
-            this.transform.Translate(Vector3.right * sideSpeed * Time.deltaTime);
+            float horizontal = Input.GetAxis("Horizontal");
+            return new Vector2(horizontal, 0f);
         }
+    }
 
-        if (Input.GetKey(KeyCode.A))
-        {
-            this.transform.Translate(Vector3.left * sideSpeed * Time.deltaTime);
-        }
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        rb.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
+    }
+
+    private void FixedUpdate()
+    {
+        PlayerMovement();
+    }
+
+    private void PlayerMovement()
+    {
+        rb.AddForce(movementVector * playerSpeed, ForceMode2D.Impulse);
     }
 }
