@@ -131,9 +131,6 @@ PublishScripts/
 *.nuget.props
 *.nuget.targets
 
-# BeatPulse healthcheck temp database
-healthchecksdb
-
 /[Ll]ibrary/
 /[Tt]emp/
 /[Oo]bj/
