@@ -365,6 +365,7 @@ ExportedObj/
 *.unity
 *asset
 *.prefab
+*.ttf
 
 # Unity3D generated meta files
 *.pidb.meta
