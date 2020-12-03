@@ -16,7 +16,7 @@ public class PlayerAction : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.D))
         {
-            this.transform.Translate(Vector2.Right * playerSpeed * Time.fixedDeltaTime);
+            this.transform.Translate(Vector2.right * playerSpeed * Time.fixedDeltaTime);
         }
     }
 }
