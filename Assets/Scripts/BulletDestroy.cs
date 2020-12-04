@@ -2,11 +2,16 @@
 
 public class BulletDestroy : MonoBehaviour
 {
+    string[] Collisions = {"Border", "Enemy"};
     void OnTriggerEnter2D(Collider2D col)
     {
-        if(col.tag == "Border")
+        foreach(string i in Collisions)
         {
-            Destroy(this.gameObject);
+            if(col.tag == i)
+            {
+                Destroy(this.gameObject);
+                return;
+            }
         }
     }
 }

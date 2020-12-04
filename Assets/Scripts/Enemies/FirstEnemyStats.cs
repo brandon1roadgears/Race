@@ -3,11 +3,15 @@
 public class FirstEnemyStats : MonoBehaviour
 {
     private short HealthPoint = 1;
+    private string[] Collisions = { "Bullet" };
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.tag == "Bullet")
+        foreach(string i in Collisions)
         {
-            --HealthPoint;
+            if (col.tag == "Bullet")
+            {
+                --HealthPoint;
+            }
         }
         if (HealthPoint == 0)
         {
