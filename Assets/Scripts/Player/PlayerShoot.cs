@@ -2,13 +2,12 @@
 
 public class PlayerShoot : MonoBehaviour
 {
-    [SerializeField] private GameObject Bullet;
+    [SerializeField] private GameObject Bullet = null;
     private Transform ShootPoint;
 
     private void Start()
     {
         ShootPoint = GameObject.Find("PlayerShootPoint").GetComponent<Transform>();
-        Debug.Log(ShootPoint.name);
     }
 
     private void Update()
