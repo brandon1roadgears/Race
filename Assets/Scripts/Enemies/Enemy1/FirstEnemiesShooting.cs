@@ -23,7 +23,7 @@ public class FirstEnemiesShooting : MonoBehaviour
 
     private IEnumerator ShootLogic()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1.5f);
         GameObject Bull = Instantiate(Bullet, ShootPoint.position, ShootPoint.rotation);
         Rigidbody2D rb = Bull.GetComponent<Rigidbody2D>();
         rb.AddForce(ShootPoint.up, ForceMode2D.Impulse);

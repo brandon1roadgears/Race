@@ -2,7 +2,7 @@
 
 public class BulletDestroy : MonoBehaviour
 {
-    string[] Collisions = {"Border", "Enemy"};
+    string[] Collisions = {"Border", "Enemy", "Player"};
     void OnTriggerEnter2D(Collider2D col)
     {
         foreach(string i in Collisions)
