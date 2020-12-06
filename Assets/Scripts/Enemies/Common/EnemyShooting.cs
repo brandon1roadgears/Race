@@ -5,15 +5,15 @@ public class EnemyShooting : MonoBehaviour
 {
     [SerializeField] private GameObject Bullet = null;
     [SerializeField] private float WaitingTime = 0.0f;
-    private Transform ShootPoint;
+    private Transform ShootPoint = null;
     private bool IsShooting = true;
 
-    void Start()
+    private void Start()
     {
         ShootPoint = transform.GetChild(0).GetComponent<Transform>();
     }
 
-    void Update()
+    private void Update()
     {
         if (IsShooting)
         {

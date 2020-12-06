@@ -3,6 +3,7 @@
 public class PlayerAction : MonoBehaviour
 {
     private float playerSpeed = 10f;
+
     private void FixedUpdate()
     {
         MovementLogic();

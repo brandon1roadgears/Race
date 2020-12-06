@@ -3,7 +3,7 @@
 public class PlayerShoot : MonoBehaviour
 {
     [SerializeField] private GameObject Bullet = null;
-    private Transform ShootPoint;
+    private Transform ShootPoint = null;
 
     private void Start()
     {

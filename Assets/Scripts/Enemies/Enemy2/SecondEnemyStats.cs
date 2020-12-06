@@ -4,13 +4,15 @@ using UnityEngine.UI;
 public class SecondEnemyStats : MonoBehaviour
 {
     private short HealthPoint = 2;
-    private string[] Collisions = { "Bullet" };
-    private Text Score;
-    void Start()
+    private string[] Collisions = { "PlayerBullet" };
+    private Text Score = null;
+
+    private void Start()
     {
         Score = GameObject.Find("Text(Points)").GetComponent<Text>();
     }
-    void OnTriggerEnter2D(Collider2D col)
+
+    private void OnTriggerEnter2D(Collider2D col)
     {
         foreach (string i in Collisions)
         {
