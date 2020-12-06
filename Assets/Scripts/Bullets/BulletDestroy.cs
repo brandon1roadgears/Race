@@ -2,17 +2,21 @@
 
 public class BulletDestroy : MonoBehaviour
 {
-    private string[] Collisions = { "Border", "Enemy", "Player" };
+    private string[] Collisions = null;
 
-    void Start()
+    private void Start()
     {
-        
         if(this.gameObject.tag == "EnemyBullet")
         {
-            Collisions[1] = "None";
+            Collisions = new string[] { "Player", "PlayerBullet", "Border"};
+        }
+        else if(this.gameObject.tag == "PlayerBullet")
+        {
+            Collisions = new string[] { "Enemy", "EnemyBullet", "Border" };
         }
     }
-    void OnTriggerEnter2D(Collider2D col)
+
+    private void OnTriggerEnter2D(Collider2D col)
     {
         foreach(string i in Collisions)
         {
