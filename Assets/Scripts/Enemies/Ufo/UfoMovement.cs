@@ -1,9 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class UfoMovement : MonoBehaviour
 {
+    private float radius = 6f;
+    private float CenterX = -2f ;
     // Start is called before the first frame update
     void Start()
     {
@@ -11,8 +11,8 @@ public class UfoMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        this.transform.position = new Vector2(radius * Mathf.Cos(Time.time) + CenterX, this.transform.position.y);
     }
 }
