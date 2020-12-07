@@ -6,11 +6,14 @@ public class Enemy1Monitoring : MonoBehaviour
 
     private void Start()
     {
-        PlayerPosition = GameObject.Find("Player").GetComponent<Transform>();    
+        PlayerPosition = GameObject.Find("Player").GetComponent<Transform>();
     }
 
     private void Update()
     {
-        this.transform.LookAt2D(this.transform.up, PlayerPosition);
+        if(PlayerPosition != null)
+        {
+            this.transform.LookAt2D(this.transform.up, PlayerPosition);
+        }
     }
 }
