@@ -1,18 +1,28 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private byte HealthPoint = 5;
+    private Text HealthText = null;
+
+    private void Start()
     {
-        
+        HealthText = GameObject.Find("Text(Hp_points)").GetComponent<Text>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter2D(Collider2D col)
     {
-        
+        if(col.tag == "EnemyBullet")
+        {
+            --HealthPoint;
+            byte Hp = byte.Parse(HealthText.text);
+            --Hp;
+            HealthText.text = Hp.ToString();
+        }
+        if(HealthPoint == 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
 }
