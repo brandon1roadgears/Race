@@ -5,7 +5,14 @@ public class SecondEnemyMovement : MonoBehaviour
 {
     float WaitingTime = 1.0f;
     private bool IsMoving = true;
-    private float MoveDir = 1.5f;
+    private float MoveDir = 0.0f;
+    private float [] Rnd = {-1.5f, 1.5f};
+
+    private void Start()
+    {
+        int e = Mathf.RoundToInt(Random.Range(0, 2));
+        MoveDir = Rnd[e];
+    }
 
     private void Update()
     {
