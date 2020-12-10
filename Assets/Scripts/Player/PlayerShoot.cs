@@ -4,10 +4,12 @@ public class PlayerShoot : MonoBehaviour
 {
     [SerializeField] private GameObject Bullet = null;
     private Transform ShootPoint = null;
+    private AudioSource ShootSound = null;
 
     private void Start()
     {
         ShootPoint = GameObject.Find("PlayerShootPoint").GetComponent<Transform>();
+        ShootSound = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -15,6 +17,7 @@ public class PlayerShoot : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             ShootLogic();
+            ShootSound.Play();
         }
     }
     
