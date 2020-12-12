@@ -31,48 +31,45 @@ public class SpawnBehaviour : MonoBehaviour
         Score = int.Parse(ScorePoints.text);
         switch (Score)
         {
-            case int z when (z >= 0 && !IsCall):
+            case int z when (z == 0 && z <= 10 && !IsCall):
                 IsCall = true;
-                LightScript1();
+                LightScript1(1);
                 break;
 
-            case int z when (z >= 51 && z <= 99):
+            case int z when (z >= 11 && z <= 20 &&!IsCall):
+                IsCall = true;
+                LightScript1(2);
+                break;
+
+            case int z when (z >= 21 && z <= 30):
                 //StartCorutine()
                 break;
 
-            case int z when (z >= 104 && z <= 199):
+            case int z when (z >= 31 && z <= 40):
                 //StartCorutine()
                 break;
 
-            case int z when (z >= 10000 && z <= 10000):
+            case int z when (z >= 41 && z <= 50):
                 //StartCorutine()
                 break;
 
-            case int z when (z >= 10000 && z <= 10000):
-                //StartCorutine()
-                break;
-
-            case int z when (z >= 10000 && z <= 10000):
+            case int z when (z >= 51 && z <= 60):
                 //StartCorutine()
                 break;
         }
     }
 
-    private void LightScript1()
+    private void LightScript1(int HowMany)
     {
-        EnSpDa = new EnemySpawnData[5];
-        for(int i = 0; i < 5; ++i)
+        EnSpDa = new EnemySpawnData[HowMany];
+        for(int i = 0; i < HowMany; ++i)
         {
             EnSpDa[i].EnemyType = Enemy1;
+            EnSpDa[i].EnemyPos = new Vector2(Random.Range(-2f, 5f), Random.Range(-2f, 5f));
         }
-        EnSpDa[0].EnemyPos = new Vector3(-6.32f, 2.86f, 0f);
-        EnSpDa[1].EnemyPos = new Vector3(-1.83f, 2.86f, 0f);
-        EnSpDa[2].EnemyPos = new Vector3( 2.67f, 2.86f, 0f);
-        EnSpDa[3].EnemyPos = new Vector3(-4.08f, 1.36f, 0f);
-        EnSpDa[4].EnemyPos = new Vector3(-0.67f, 1.36f, 0f);
-        for (int i = 0; i < 5; ++i)
+        foreach(var i  in EnSpDa)
         {
-            Instantiate(EnSpDa[i].EnemyType, EnSpDa[i].EnemyPos, new Quaternion(0f,0f,0f,0f));
+            Instantiate(i.EnemyType, i.EnemyPos, new Quaternion(0f, 0f, 0f, 0f));
         }
     }
 }
