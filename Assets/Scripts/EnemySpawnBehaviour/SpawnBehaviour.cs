@@ -8,7 +8,7 @@ public class SpawnBehaviour : MonoBehaviour
     private Text ScorePoints = null;
     private EnemySpawnData[] EnSpDa = null;
     private int Score = 0;
-    private bool IsCall = false;
+    internal int CountOfEnemies = 0;
     
     private struct EnemySpawnData
     {
@@ -31,18 +31,16 @@ public class SpawnBehaviour : MonoBehaviour
         Score = int.Parse(ScorePoints.text);
         switch (Score)
         {
-            case int z when (z == 0 && z <= 10 && !IsCall):
-                IsCall = true;
+            case int z when (z >= 0 && z <= 10 && CheckEnemies()):
                 LightScript1(1);
                 break;
 
-            case int z when (z >= 11 && z <= 20 &&!IsCall):
-                IsCall = true;
+            case int z when (z >= 11 && z <= 20 && CheckEnemies()):              
                 LightScript1(2);
                 break;
 
             case int z when (z >= 21 && z <= 30):
-                //StartCorutine()
+                
                 break;
 
             case int z when (z >= 31 && z <= 40):
@@ -58,18 +56,26 @@ public class SpawnBehaviour : MonoBehaviour
                 break;
         }
     }
-
     private void LightScript1(int HowMany)
     {
         EnSpDa = new EnemySpawnData[HowMany];
         for(int i = 0; i < HowMany; ++i)
         {
             EnSpDa[i].EnemyType = Enemy1;
-            EnSpDa[i].EnemyPos = new Vector2(Random.Range(-2f, 5f), Random.Range(-2f, 5f));
+            EnSpDa[i].EnemyPos = new Vector2(Random.Range(-7f, 3f), Random.Range(3f, -3f));
         }
         foreach(var i  in EnSpDa)
         {
             Instantiate(i.EnemyType, i.EnemyPos, new Quaternion(0f, 0f, 0f, 0f));
         }
+    }
+
+    private bool CheckEnemies()
+    {
+        if (CountOfEnemies == 0)
+        {
+            return true;
+        }
+        return false;
     }
 }
