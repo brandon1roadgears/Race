@@ -3,13 +3,16 @@ using UnityEngine.UI;
 
 public class FirstEnemyStats : MonoBehaviour
 {
-    private short HealthPoint = 1;
+    [SerializeField] private short HealthPoint = 1;
     private string[] Collisions = { "PlayerBullet" };
     private Text Score = null;
+    private SpawnBehaviour SpaBeh = null;
 
     private void Start()
     {
         Score = GameObject.Find("Text(Points)").GetComponent<Text>();
+        SpaBeh = GameObject.Find("Main Camera").GetComponent<SpawnBehaviour>();
+        ++SpaBeh.CountOfEnemies;
     }
 
     private void OnTriggerEnter2D(Collider2D col)
@@ -23,6 +26,7 @@ public class FirstEnemyStats : MonoBehaviour
         }
         if (HealthPoint == 0)
         {
+            --SpaBeh.CountOfEnemies;
             short Points = short.Parse(Score.text);
             ++Points;
             Score.text = Points.ToString();
