@@ -3,11 +3,13 @@ using UnityEngine.UI;
 
 public class SpawnBehaviour : MonoBehaviour
 {
-    [SerializeField] 
-    private GameObject Enemy1 = null, Enemy2 = null, Enemy3 = null;
+    [SerializeField]
+    private GameObject Invader1 = null, Invader2 = null, Invader3 = null;
+    private GameObject[] Enemies = new GameObject[3];
     private Text ScorePoints = null;
     private EnemySpawnData[] EnSpDa = null;
     private int Score = 0;
+
     internal int CountOfEnemies = 0;
     
     private struct EnemySpawnData
@@ -19,6 +21,9 @@ public class SpawnBehaviour : MonoBehaviour
     private void Start()
     {
         ScorePoints = GameObject.Find("Text(Points)").GetComponent<Text>();
+        Enemies[0] = Invader1;
+        Enemies[1] = Invader2;
+        Enemies[2] = Invader3;
     }
 
     private void Update()
@@ -39,20 +44,20 @@ public class SpawnBehaviour : MonoBehaviour
                 LightScript1(2);
                 break;
 
-            case int z when (z >= 21 && z <= 30):
-                
+            case int z when (z >= 21 && z <= 30 && CheckEnemies()):
+                LightScript1(3);
                 break;
 
-            case int z when (z >= 31 && z <= 40):
-                //StartCorutine()
+            case int z when (z >= 31 && z <= 40 && CheckEnemies()):
+                LightScript1(4);
                 break;
 
-            case int z when (z >= 41 && z <= 50):
-                //StartCorutine()
+            case int z when (z >= 41 && z <= 50 && CheckEnemies()):
+                LightScript1(5);
                 break;
 
-            case int z when (z >= 51 && z <= 60):
-                //StartCorutine()
+            case int z when (z >= 51 && z <= 60 && CheckEnemies()):
+                LightScript1(6);
                 break;
         }
     }
@@ -61,14 +66,16 @@ public class SpawnBehaviour : MonoBehaviour
         EnSpDa = new EnemySpawnData[HowMany];
         for(int i = 0; i < HowMany; ++i)
         {
-            EnSpDa[i].EnemyType = Enemy1;
-            EnSpDa[i].EnemyPos = new Vector2(Random.Range(-7f, 3f), Random.Range(3f, -3f));
+            EnSpDa[i].EnemyType = Enemies[Random.Range(0, 3)];
+            EnSpDa[i].EnemyPos = new Vector2(Random.Range(-7f, 3f), Random.Range(3f, 1.2f));
         }
         foreach(var i  in EnSpDa)
         {
             Instantiate(i.EnemyType, i.EnemyPos, new Quaternion(0f, 0f, 0f, 0f));
         }
     }
+
+    
 
     private bool CheckEnemies()
     {
