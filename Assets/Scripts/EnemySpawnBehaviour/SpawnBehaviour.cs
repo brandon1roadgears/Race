@@ -59,6 +59,19 @@ public class SpawnBehaviour : MonoBehaviour
             case int z when (z >= 51 && z <= 60 && CheckEnemies()):
                 LightScript1(6);
                 break;
+
+            case int z when (z >= 61 && z <= 70 && CheckEnemies()):
+                LightScript1(7);
+                break;
+
+            case int z when (z >= 71 && z <= 80 && CheckEnemies()):
+                LightScript1(8);
+                break;
+
+            case int z when (z >= 81 && CheckEnemies()):
+                LightScript1(9);
+                break;
+
         }
     }
     private void LightScript1(int HowMany)
@@ -74,8 +87,6 @@ public class SpawnBehaviour : MonoBehaviour
             Instantiate(i.EnemyType, i.EnemyPos, new Quaternion(0f, 0f, 0f, 0f));
         }
     }
-
-    
 
     private bool CheckEnemies()
     {
