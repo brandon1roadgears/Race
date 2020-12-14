@@ -11,7 +11,7 @@ public class EnemyShooting : MonoBehaviour
     private void Start()
     {
         ShootPoint = transform.GetChild(0).GetComponent<Transform>();
-        WaitingTime = Random.Range(1.5f, 2.5f);
+        WaitingTime = Random.Range(0.8f, 2.5f);
     }
 
     private void Update()
