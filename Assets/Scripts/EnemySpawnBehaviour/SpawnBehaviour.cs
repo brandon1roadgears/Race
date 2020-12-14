@@ -8,7 +8,6 @@ public class SpawnBehaviour : MonoBehaviour
     private GameObject Invader1 = null, Invader2 = null, Invader3 = null;
     private GameObject[] Enemies = new GameObject[3];
     private Text ScorePoints = null;
-    private EnemySpawnData[] EnSpDa = null;
     private int Score = 0;
     private bool IsCalledSpawn = true;
 
@@ -38,65 +37,58 @@ public class SpawnBehaviour : MonoBehaviour
         Score = int.Parse(ScorePoints.text);
         switch (Score)
         {
-            case int z when (z >= 0 && z <= 10 && CheckEnemies() && IsCalledSpawn):
+            case int Points when (Points >= 0 && Points <= 10 && CheckEnemies() && IsCalledSpawn):
                 IsCalledSpawn = false;
                 StartCoroutine(LightScript1(1));
                 break;
 
-            case int z when (z >= 11 && z <= 20 && CheckEnemies() && IsCalledSpawn):
+            case int Points when (Points >= 11 && Points <= 20 && CheckEnemies() && IsCalledSpawn):
                 IsCalledSpawn = false;
                 StartCoroutine(LightScript1(2));
                 break;
 
-            case int z when (z >= 21 && z <= 30 && CheckEnemies() && IsCalledSpawn):
+            case int Points when (Points >= 21 && Points <= 30 && CheckEnemies() && IsCalledSpawn):
                 IsCalledSpawn = false;
                 StartCoroutine(LightScript1(3));
                 break;
 
-            case int z when (z >= 31 && z <= 40 && CheckEnemies() && IsCalledSpawn):
+            case int Points when (Points >= 31 && Points <= 40 && CheckEnemies() && IsCalledSpawn):
                 IsCalledSpawn = false;
                 StartCoroutine(LightScript1(4));
                 break;
 
-            case int z when (z >= 41 && z <= 50 && CheckEnemies() && IsCalledSpawn):
+            case int Points when (Points >= 41 && Points <= 50 && CheckEnemies() && IsCalledSpawn):
                 IsCalledSpawn = false;
                 StartCoroutine(LightScript1(5));
                 break;
 
-            case int z when (z >= 51 && z <= 60 && CheckEnemies() && IsCalledSpawn):
+            case int Points when (Points >= 51 && Points <= 60 && CheckEnemies() && IsCalledSpawn):
                 IsCalledSpawn = false;
                 StartCoroutine(LightScript1(6));
                 break;
 
-            case int z when (z >= 61 && z <= 70 && CheckEnemies() && IsCalledSpawn):
+            case int Points when (Points >= 61 && Points <= 70 && CheckEnemies() && IsCalledSpawn):
                 IsCalledSpawn = false;
                 StartCoroutine(LightScript1(7));
                 break;
 
-            case int z when (z >= 71 && z <= 80 && CheckEnemies() && IsCalledSpawn):
+            case int Points when (Points >= 71 && Points <= 80 && CheckEnemies() && IsCalledSpawn):
                 IsCalledSpawn = false;
                 StartCoroutine(LightScript1(8));
                 break;
 
-            case int z when (z >= 81 && CheckEnemies() && IsCalledSpawn):
+            case int Points when (Points >= 81 && CheckEnemies() && IsCalledSpawn):
                 IsCalledSpawn = false;
                 StartCoroutine(LightScript1(9));
                 break;
-
         }
     }
     private IEnumerator LightScript1(int HowMany)
     {
         yield return new WaitForSeconds(1.5f);
-        EnSpDa = new EnemySpawnData[HowMany];
-        for(int i = 0; i < HowMany; ++i)
+        for(byte i = 0; i < HowMany; ++i)
         {
-            EnSpDa[i].EnemyType = Enemies[Random.Range(0, 3)];
-            EnSpDa[i].EnemyPos = new Vector2(Random.Range(-7f, 3f), Random.Range(3f, 1.2f));
-        }
-        foreach(var i  in EnSpDa)
-        {
-            Instantiate(i.EnemyType, i.EnemyPos, new Quaternion(0f, 0f, 0f, 0f));
+            Instantiate(Enemies[Random.Range(0, 3)], new Vector2(Random.Range(-7f, 3f), Random.Range(3f, 1.2f)), new Quaternion(0f, 0f, 0f, 0f));
         }
         IsCalledSpawn = true;
     }
