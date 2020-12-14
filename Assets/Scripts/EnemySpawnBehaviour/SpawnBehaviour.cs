@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class SpawnBehaviour : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class SpawnBehaviour : MonoBehaviour
     private Text ScorePoints = null;
     private EnemySpawnData[] EnSpDa = null;
     private int Score = 0;
+    private bool IsCalledSpawn = true;
 
     internal int CountOfEnemies = 0;
     
@@ -36,46 +38,56 @@ public class SpawnBehaviour : MonoBehaviour
         Score = int.Parse(ScorePoints.text);
         switch (Score)
         {
-            case int z when (z >= 0 && z <= 10 && CheckEnemies()):
-                LightScript1(1);
+            case int z when (z >= 0 && z <= 10 && CheckEnemies() && IsCalledSpawn):
+                IsCalledSpawn = false;
+                StartCoroutine(LightScript1(1));
                 break;
 
-            case int z when (z >= 11 && z <= 20 && CheckEnemies()):              
-                LightScript1(2);
+            case int z when (z >= 11 && z <= 20 && CheckEnemies() && IsCalledSpawn):
+                IsCalledSpawn = false;
+                StartCoroutine(LightScript1(2));
                 break;
 
-            case int z when (z >= 21 && z <= 30 && CheckEnemies()):
-                LightScript1(3);
+            case int z when (z >= 21 && z <= 30 && CheckEnemies() && IsCalledSpawn):
+                IsCalledSpawn = false;
+                StartCoroutine(LightScript1(3));
                 break;
 
-            case int z when (z >= 31 && z <= 40 && CheckEnemies()):
-                LightScript1(4);
+            case int z when (z >= 31 && z <= 40 && CheckEnemies() && IsCalledSpawn):
+                IsCalledSpawn = false;
+                StartCoroutine(LightScript1(4));
                 break;
 
-            case int z when (z >= 41 && z <= 50 && CheckEnemies()):
-                LightScript1(5);
+            case int z when (z >= 41 && z <= 50 && CheckEnemies() && IsCalledSpawn):
+                IsCalledSpawn = false;
+                StartCoroutine(LightScript1(5));
                 break;
 
-            case int z when (z >= 51 && z <= 60 && CheckEnemies()):
-                LightScript1(6);
+            case int z when (z >= 51 && z <= 60 && CheckEnemies() && IsCalledSpawn):
+                IsCalledSpawn = false;
+                StartCoroutine(LightScript1(6));
                 break;
 
-            case int z when (z >= 61 && z <= 70 && CheckEnemies()):
-                LightScript1(7);
+            case int z when (z >= 61 && z <= 70 && CheckEnemies() && IsCalledSpawn):
+                IsCalledSpawn = false;
+                StartCoroutine(LightScript1(7));
                 break;
 
-            case int z when (z >= 71 && z <= 80 && CheckEnemies()):
-                LightScript1(8);
+            case int z when (z >= 71 && z <= 80 && CheckEnemies() && IsCalledSpawn):
+                IsCalledSpawn = false;
+                StartCoroutine(LightScript1(8));
                 break;
 
-            case int z when (z >= 81 && CheckEnemies()):
-                LightScript1(9);
+            case int z when (z >= 81 && CheckEnemies() && IsCalledSpawn):
+                IsCalledSpawn = false;
+                StartCoroutine(LightScript1(9));
                 break;
 
         }
     }
-    private void LightScript1(int HowMany)
+    private IEnumerator LightScript1(int HowMany)
     {
+        yield return new WaitForSeconds(1.5f);
         EnSpDa = new EnemySpawnData[HowMany];
         for(int i = 0; i < HowMany; ++i)
         {
@@ -86,6 +98,7 @@ public class SpawnBehaviour : MonoBehaviour
         {
             Instantiate(i.EnemyType, i.EnemyPos, new Quaternion(0f, 0f, 0f, 0f));
         }
+        IsCalledSpawn = true;
     }
 
     private bool CheckEnemies()
