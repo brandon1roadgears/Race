@@ -48,44 +48,94 @@ public class SpawnBehaviour : MonoBehaviour
             IsCalledSpawn = false;
             switch (Score)
             {
-                case int Points when (Points >= 0 && Points <= 10):
+                case int Points when (Points >= 0 && Points <= 10):                
                     StartCoroutine(LightScript1(1));
                     break;
 
-                case int Points when (Points >= 11 && Points <= 20):
+                case int Points when (Points == 11):                               
+                    StartCoroutine(LightScript2(1, 0));
+                    break;
+
+                case int Points when (Points >= 12 && Points <= 22):               
                     StartCoroutine(LightScript1(2));
                     break;
 
-                case int Points when (Points >= 21 && Points <= 30):
+                case int Points when (Points == 24):                               
+                    StartCoroutine(LightScript2(2, 0));
+                    break;
+
+                case int Points when (Points >= 26 && Points <= 35):
                     StartCoroutine(LightScript1(3));
                     break;
 
-                case int Points when (Points >= 31 && Points <= 40):
+                case int Points when (Points == 38):
+                    StartCoroutine(LightScript2(2, 1));
+                    break;
+
+                case int Points when (Points >= 41 && Points <= 53):
                     StartCoroutine(LightScript1(4));
                     break;
 
-                case int Points when (Points >= 41 && Points <= 50):
+                case int Points when (Points == 57):
+                    StartCoroutine(LightScript2(2, 2));
+                    break;
+
+                case int Points when (Points >= 61 && Points <= 76):
                     StartCoroutine(LightScript1(5));
                     break;
 
-                case int Points when (Points >= 51 && Points <= 60):
+                case int Points when (Points == 81):
+                    StartCoroutine(LightScript2(3, 0));
+                    break;
+
+                case int Points when (Points >= 84 && Points <= 102):
                     StartCoroutine(LightScript1(6));
                     break;
 
-                case int Points when (Points >= 61 && Points <= 70):
+                case int Points when (Points == 108):
+                    StartCoroutine(LightScript2(3, 1));
+                    break;
+
+                case int Points when (Points >= 112 && Points <= 133):
                     StartCoroutine(LightScript1(7));
                     break;
 
-                case int Points when (Points >= 71 && Points <= 80):
+                case int Points when (Points == 140):
+                    StartCoroutine(LightScript2(3, 2));
+                    break;
+
+                case int Points when (Points >= 145 && Points <= 169):
                     StartCoroutine(LightScript1(8));
                     break;
 
-                case int Points when (Points >= 81):
+                case int Points when (Points == 177):
+                    StartCoroutine(LightScript2(3, 3));
+                    break;
+
+                case int Points when (Points >= 183 && Points != 219):
                     StartCoroutine(LightScript1(9));
+                    break;
+
+                case int Points when (Points == 219):
+                    StartCoroutine(CallTheBoss());
                     break;
             }
         }
     }
+
+    private IEnumerator CallTheBoss()
+    {
+        yield return new WaitForSeconds(2f);
+        IsCalledSpawn = true;
+    }
+
+    private IEnumerator LightScript2(int CountOfUfo, int CountOfOther)
+    {
+        yield return new WaitForSeconds(1.5f);
+
+        IsCalledSpawn = true;
+    }
+
     private IEnumerator LightScript1(int HowMany)
     {
         yield return new WaitForSeconds(1.5f);
