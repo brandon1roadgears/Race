@@ -89,30 +89,45 @@ public class SpawnBehaviour : MonoBehaviour
     private IEnumerator LightScript1(int HowMany)
     {
         yield return new WaitForSeconds(1.5f);
+        for (byte i = 0; i < HowMany; ++i)
+        {
+            PrepareArray();
+            SpawnOnRandomPlace();
+            CheckOccupiedPlaces();
+        }
+        IsCalledSpawn = true;
+    }
+
+    private void PrepareArray()
+    {
         CountOfFreePlace = 18;
         B = new int[CountOfFreePlace];
         for (int i = 0; i < CountOfFreePlace; ++i)
         {
             B[i] = i;
         }
-        for (byte i = 0; i < HowMany; ++i)
+    }
+
+    private void SpawnOnRandomPlace()
+    {
+        int Rnd = Random.Range(0, CountOfFreePlace);
+        Instantiate(Enemies[Random.Range(0, 3)], ArrayOfPositions[B[Rnd]], new Quaternion(0f, 0f, 0f, 0f));
+        B[Rnd] = -1;
+    }
+
+    private void CheckOccupiedPlaces()
+    {
+        A = B;
+        --CountOfFreePlace;
+        B = new int[CountOfFreePlace];
+        for (int j = 0, z = 0; j < CountOfFreePlace + 1; ++j)
         {
-            int Rnd = Random.Range(0, CountOfFreePlace);
-            Instantiate(Enemies[Random.Range(0, 3)], ArrayOfPositions[B[Rnd]], new Quaternion(0f, 0f, 0f, 0f));
-            B[Rnd] = -1;
-            A = B;
-            --CountOfFreePlace;
-            B = new int[CountOfFreePlace];
-            for(int j = 0, z = 0; j < CountOfFreePlace + 1; ++j)
+            if (A[j] != -1)
             {
-                if(A[j] != -1)
-                {
-                    B[z] = A[j];
-                    ++z;
-                }
+                B[z] = A[j];
+                ++z;
             }
         }
-        IsCalledSpawn = true;
     }
 
     private bool CheckEnemies()
