@@ -5,14 +5,14 @@ using System.Collections;
 public class SpawnBehaviour : MonoBehaviour
 {
     [SerializeField]
-    private GameObject Invader1 = null, Invader2 = null, Invader3 = null;
+    private GameObject Invader1 = null, Invader2 = null, Invader3 = null, Ufo = null;
     private Text ScorePoints = null;
     private int Score = 0;
     private bool IsCalledSpawn = true;
     private int CountOfFreePlace = 18;
 
     private GameObject[] Enemies = null;
-    private Vector2[] ArrayOfPositions = null;
+    private Vector2[] ArrayOfPositions = null, ArrayOfUfoPositions = null, ArrayEnemyWithUfo = null;
     private int[] A = null;
     private int[] B = null;
     
@@ -21,20 +21,36 @@ public class SpawnBehaviour : MonoBehaviour
     private void Start()
     {
         ScorePoints = GameObject.Find("Text(Points)").GetComponent<Text>();
-        Enemies = new GameObject[3];
-        Enemies[0] = Invader1;
-        Enemies[1] = Invader2;
-        Enemies[2] = Invader3;
-        ArrayOfPositions = new Vector2[18] { new Vector2(-5.75f, 3.068759f), new Vector2(-4.25f, 3.068759f), new Vector2(-2.75f, 3.068759f),
-                                             new Vector2(-1.25f, 3.068759f), new Vector2(0.25f, 3.068759f), new Vector2(1.75f, 3.068759f),
+        Enemies = new GameObject[3]
+        { 
+            Invader1,
+            Invader2,
+            Invader3
+        };
+        ArrayOfPositions = new Vector2[18] 
+        { 
+          new Vector2(-5.75f, 3.068759f), new Vector2(-4.25f, 3.068759f), new Vector2(-2.75f, 3.068759f),
+          new Vector2(-1.25f, 3.068759f), new Vector2(0.25f, 3.068759f), new Vector2(1.75f, 3.068759f),
+          new Vector2(-5.42f, 1.86f), new Vector2(-3.92f, 1.86f), new Vector2(-2.42f, 1.86f),
+          new Vector2(-0.9200001f, 1.86f), new Vector2(0.5799999f, 1.86f), new Vector2(2.08f, 1.86f),
+          new Vector2(-5.75f, 0.3f), new Vector2(-4.25f, 0.3f), new Vector2(-2.75f, 0.3f),
+          new Vector2(-1.25f, 0.3f), new Vector2(0.25f, 0.3f), new Vector2(1.75f, 0.3f) 
+        };
 
-                                             new Vector2(-5.42f, 1.86f), new Vector2(-3.92f, 1.86f), new Vector2(-2.42f, 1.86f),
-                                             new Vector2(-0.9200001f, 1.86f), new Vector2(0.5799999f, 1.86f), new Vector2(2.08f, 1.86f),
+        ArrayOfUfoPositions = new Vector2[3] 
+        { 
+          new Vector2(Random.Range(-6f, 3f), 3.5f), 
+          new Vector2(Random.Range(-6f, 3f), 1.5f), 
+          new Vector2(Random.Range(-6f, 3f), -0.75f) 
+        };
 
-                                             new Vector2(-5.75f, 0.3f), new Vector2(-4.25f, 0.3f), new Vector2(-2.75f, 0.3f),
-                                             new Vector2(-1.25f, 0.3f), new Vector2(0.25f, 0.3f), new Vector2(1.75f, 0.3f) };
+        ArrayEnemyWithUfo = new Vector2[3] 
+        {
+            new Vector2(-5.6f, 2.39f),
+            new Vector2(1.75f, 2.39f),
+            new Vector2(-1.8f, 0.1f)
+        };
     }
-
     private void Update()
     {
         CheckScore();
@@ -126,22 +142,30 @@ public class SpawnBehaviour : MonoBehaviour
     private IEnumerator CallTheBoss()
     {
         yield return new WaitForSeconds(2f);
+        
         IsCalledSpawn = true;
     }
 
     private IEnumerator LightScript2(int CountOfUfo, int CountOfOther)
     {
         yield return new WaitForSeconds(1.5f);
-
+        for(int i = 0; i < CountOfUfo; ++i)
+        {
+            Instantiate(Ufo, ArrayOfUfoPositions[i], new Quaternion(0f, 0f, 0f, 0f));
+        }
+        for(int i = 0; i < CountOfOther; ++i)
+        {
+            Instantiate(Enemies[Random.Range(0, 3)], ArrayEnemyWithUfo[i], new Quaternion(0f, 0f, 0f, 0f));
+        }
         IsCalledSpawn = true;
     }
 
     private IEnumerator LightScript1(int HowMany)
     {
         yield return new WaitForSeconds(1.5f);
+        PrepareArray();
         for (byte i = 0; i < HowMany; ++i)
         {
-            PrepareArray();
             SpawnOnRandomPlace();
             CheckOccupiedPlaces();
         }
