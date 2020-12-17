@@ -3,21 +3,23 @@
 public class PlayerShoot : MonoBehaviour
 {
     [SerializeField] private GameObject Bullet = null;
+    [SerializeField] private AudioClip ShootSound = null;
     private Transform ShootPoint = null;
-    private AudioSource ShootSound = null;
+    private AudioSource SoundPlay = null;
+    
 
     private void Start()
     {
         ShootPoint = GameObject.Find("PlayerShootPoint").GetComponent<Transform>();
-        ShootSound = GetComponent<AudioSource>();
+        SoundPlay = GameObject.Find("Main Camera").GetComponent<AudioSource>();
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            SoundPlay.PlayOneShot(ShootSound);
             ShootLogic();
-            ShootSound.Play();
         }
     }
     
