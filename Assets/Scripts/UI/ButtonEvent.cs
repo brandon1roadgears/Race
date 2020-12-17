@@ -12,4 +12,9 @@ public class ButtonEvent : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void OnHomeClick()
+    {
+        SceneManager.LoadScene("Menu");
+    }
 }
