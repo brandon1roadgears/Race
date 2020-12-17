@@ -3,11 +3,14 @@ using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour
 {
-    private byte HealthPoint = 5;
+    [SerializeField] private AudioClip GameOverSound = null;
+    private AudioSource SoundPlay = null;
     private Text HealthText = null;
+    private byte HealthPoint = 5;
 
     private void Start()
     {
+        SoundPlay = GameObject.Find("Main Camera").GetComponent<AudioSource>();
         HealthText = GameObject.Find("Text(Hp_points)").GetComponent<Text>();
     }
 
@@ -22,7 +25,11 @@ public class PlayerStats : MonoBehaviour
         }
         if(HealthPoint == 0)
         {
+            SoundPlay.Stop();
+            SoundPlay.PlayOneShot(GameOverSound);
+            Time.timeScale = 0;
             Destroy(this.gameObject);
         }
     }
 }
+ 
