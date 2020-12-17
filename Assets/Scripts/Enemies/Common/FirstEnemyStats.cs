@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class FirstEnemyStats : MonoBehaviour
 {
     [SerializeField] private short HealthPoint = 1;
-    private Animator DestroyAnimation = null;
+    [SerializeField] private GameObject DestroyAnimation = null;
     private string[] Collisions = { "PlayerBullet" };
     private Text Score = null;
     private SpawnBehaviour SpaBeh = null;
@@ -14,7 +14,6 @@ public class FirstEnemyStats : MonoBehaviour
         Score = GameObject.Find("Text(Points)").GetComponent<Text>();
         SpaBeh = GameObject.Find("Main Camera").GetComponent<SpawnBehaviour>();
         ++SpaBeh.CountOfEnemies;
-        DestroyAnimation = this.GetComponent<Animator>();
     }
 
     private void OnTriggerEnter2D(Collider2D col)
@@ -32,8 +31,8 @@ public class FirstEnemyStats : MonoBehaviour
             short Points = short.Parse(Score.text);
             ++Points;
             Score.text = Points.ToString();
-            DestroyAnimation.SetBool("IsDead", true);
-            Destroy(this.gameObject, DestroyAnimation.GetCurrentAnimatorClipInfo(0).Length);
+            Instantiate(DestroyAnimation, this.transform.localPosition, this.transform.localRotation);
+            Destroy(this.gameObject);
         }
     }
 }
