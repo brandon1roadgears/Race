@@ -6,6 +6,8 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private AudioClip GameOverSound = null;
     [SerializeField] private GameObject Panel = null;
     [SerializeField] private Text EndScore = null;
+    [SerializeField] private GameObject DestroyAnimation = null;
+    [SerializeField] private GameObject ButtonsPanel = null;
     private AudioSource SoundPlay = null;
     private Text HealthText = null;
     private Text Score = null;
@@ -29,7 +31,9 @@ public class PlayerStats : MonoBehaviour
         }
         if(HealthPoint == 0)
         {
+            Instantiate(DestroyAnimation, this.transform.localPosition, this.transform.localRotation);
             EndScore.text = Score.text;
+            ButtonsPanel.SetActive(false);
             Panel.SetActive(true);
             SoundPlay.Stop();
             SoundPlay.PlayOneShot(GameOverSound);
