@@ -6,7 +6,7 @@ public class PlayerShoot : MonoBehaviour
     [SerializeField] private AudioClip ShootSound = null;
     private Transform ShootPoint = null;
     private AudioSource SoundPlay = null;
-    
+
 
     private void Start()
     {
@@ -14,20 +14,11 @@ public class PlayerShoot : MonoBehaviour
         SoundPlay = GameObject.Find("Main Camera").GetComponent<AudioSource>();
     }
 
-    private void Update()
+    public void ClickForShoot()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
             SoundPlay.PlayOneShot(ShootSound);
-            ShootLogic();
-        }
+            GameObject Bull = Instantiate(Bullet, ShootPoint.position, ShootPoint.rotation);
+            Rigidbody2D rb = Bull.GetComponent<Rigidbody2D>();
+            rb.AddForce(ShootPoint.up, ForceMode2D.Impulse);
     }
-    
-    private void ShootLogic()
-    {
-        GameObject Bull = Instantiate(Bullet, ShootPoint.position, ShootPoint.rotation);
-        Rigidbody2D rb = Bull.GetComponent<Rigidbody2D>();
-        rb.AddForce(ShootPoint.up, ForceMode2D.Impulse);
-    }
-    
 }
