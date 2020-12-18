@@ -128,22 +128,11 @@ public class SpawnBehaviour : MonoBehaviour
                     StartCoroutine(LightScript2(3, 3));
                     break;
 
-                case int Points when (Points >= 183 && Points != 219):
+                case int Points when (Points >= 183):
                     StartCoroutine(LightScript1(9));
-                    break;
-
-                case int Points when (Points == 219):
-                    StartCoroutine(CallTheBoss());
                     break;
             }
         }
-    }
-
-    private IEnumerator CallTheBoss()
-    {
-        yield return new WaitForSeconds(2f);
-        
-        IsCalledSpawn = true;
     }
 
     private IEnumerator LightScript2(int CountOfUfo, int CountOfOther)
