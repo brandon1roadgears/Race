@@ -25,7 +25,7 @@ public class UfoShooting : MonoBehaviour
     {
         yield return new WaitForSeconds(1.5f);
         GameObject Bull = Instantiate(Bullet, ShootPoint.position, new Quaternion(ShootPoint.rotation.x, ShootPoint.rotation.y, ShootPoint.rotation.z, 180f));
-        GameObject Bull1 = Instantiate(Bullet, new Vector2(ShootPoint.position.x + 0.76f, ShootPoint.position.y), new Quaternion(ShootPoint.rotation.x, ShootPoint.rotation.y, ShootPoint.rotation.z, 180f));
+        GameObject Bull1 = Instantiate(Bullet, new Vector2(ShootPoint.position.x + 0.401f, ShootPoint.position.y), new Quaternion(ShootPoint.rotation.x, ShootPoint.rotation.y, ShootPoint.rotation.z, 180f));
         Rigidbody2D rb = Bull.GetComponent<Rigidbody2D>();
         rb.AddForce(ShootPoint.up, ForceMode2D.Impulse);
         rb = Bull1.GetComponent<Rigidbody2D>();
