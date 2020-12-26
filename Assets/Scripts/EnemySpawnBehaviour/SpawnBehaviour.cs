@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
@@ -29,26 +29,28 @@ public class SpawnBehaviour : MonoBehaviour
         };
         ArrayOfPositions = new Vector2[18] 
         { 
-          new Vector2(-5.75f, 3.068759f), new Vector2(-4.25f, 3.068759f), new Vector2(-2.75f, 3.068759f),
-          new Vector2(-1.25f, 3.068759f), new Vector2(0.25f, 3.068759f), new Vector2(1.75f, 3.068759f),
-          new Vector2(-5.42f, 1.86f), new Vector2(-3.92f, 1.86f), new Vector2(-2.42f, 1.86f),
-          new Vector2(-0.9200001f, 1.86f), new Vector2(0.5799999f, 1.86f), new Vector2(2.08f, 1.86f),
-          new Vector2(-5.75f, 0.3f), new Vector2(-4.25f, 0.3f), new Vector2(-2.75f, 0.3f),
-          new Vector2(-1.25f, 0.3f), new Vector2(0.25f, 0.3f), new Vector2(1.75f, 0.3f) 
+          new Vector2(-2.22f, 1.37f), new Vector2(-1.47f, 1.37f), new Vector2(-0.72f, 1.37f),
+          new Vector2(-0.031f, 1.37f), new Vector2(0.78f, 1.37f), new Vector2(1.53f, 1.37f),
+
+          new Vector2(-1.81f, 0.71f), new Vector2(-1.06f, 0.71f), new Vector2(-0.31f, 0.71f),
+          new Vector2(-0.44f, 0.71f), new Vector2(1.19f, 0.71f), new Vector2(1.94f, 0.71f),
+
+          new Vector2(-2.22f, 0f), new Vector2(-1.47f, 0f), new Vector2(-0.72f, 0f),
+          new Vector2(-0.031f, 0f), new Vector2(0.78f, 0f), new Vector2(1.53f, 0f) 
         };
 
         ArrayOfUfoPositions = new Vector2[3] 
         { 
-          new Vector2(Random.Range(-6f, 3f), 3.5f), 
-          new Vector2(Random.Range(-6f, 3f), 1.5f), 
-          new Vector2(Random.Range(-6f, 3f), -0.75f) 
+          new Vector2(Random.Range(-2.98f, 2.08f), 1.77f), 
+          new Vector2(Random.Range(-2.98f, 2.08f), 0.88f), 
+          new Vector2(Random.Range(-2.98f, 2.08f), -0.14f) 
         };
 
         ArrayEnemyWithUfo = new Vector2[3] 
         {
-            new Vector2(-5.6f, 2.39f),
-            new Vector2(1.75f, 2.39f),
-            new Vector2(-1.8f, 0.1f)
+            new Vector2(-3.04f, 1.31f),
+            new Vector2(0f, 0.37f),
+            new Vector2(-3.02f, 1.37f)
         };
     }
     private void Update()
