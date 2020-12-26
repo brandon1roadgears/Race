@@ -22,6 +22,7 @@ public class ButtonEvent : MonoBehaviour
 
     public void OnStartButtonClick()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene("MainGame");
     }
 
@@ -32,6 +33,17 @@ public class ButtonEvent : MonoBehaviour
 
     public void OnHomeClick()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene("Menu");
+    }
+
+    public void OnPauseButtonClick()
+    {
+        Time.timeScale = 0;
+    }
+
+    public void OnResumeButtonClick()
+    {
+        Time.timeScale = 1;
     }
 }
