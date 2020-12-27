@@ -6,43 +6,13 @@ public class PlayerAction : MonoBehaviour
     private float LeftBorder = -3.26f, RightBorder = 3.26f;
     private bool IsMovingLeft = false;
     private bool IsMovingRight = false;
-    
+    private Camera Cam;
 
     private void Start()
     {
-        switch(Camera.main.pixelWidth)
-        {
-            case 800:
-                LeftBorder = -3.26f;
-                RightBorder = 3.26f;
-                break;
-            
-            case 1280:
-                LeftBorder = -3.47f;
-                RightBorder = 3.47f;
-                break;
-
-            case 1920:
-                LeftBorder = -3.47f;
-                RightBorder = 3.47f;
-                break;
-
-            case 2160:
-                LeftBorder = -3.94f;
-                RightBorder = 3.94f;
-                break;
-            
-            case 2560:
-                LeftBorder = -3.47f;
-                RightBorder = 3.47f;
-                break;
-
-            case 2960:
-                LeftBorder = -4.03f;
-                RightBorder = 4.03f;
-                break;
-        }
-
+        Cam = Camera.main;
+        LeftBorder = Cam.ScreenToWorldPoint(Cam.transform.position).x + 0.1f;
+        RightBorder = -Cam.ScreenToWorldPoint(Cam.transform.position).x - 0.1f;
     }
 
     private void Update()
