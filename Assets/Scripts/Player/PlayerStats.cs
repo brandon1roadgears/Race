@@ -4,10 +4,10 @@ using UnityEngine.UI;
 public class PlayerStats : MonoBehaviour
 {
     [SerializeField] private AudioClip GameOverSound = null;
-    [SerializeField] private GameObject Panel = null;
+    [SerializeField] private GameObject GameOverPanel = null;
     [SerializeField] private Text EndScore = null;
     [SerializeField] private GameObject DestroyAnimation = null;
-    [SerializeField] private GameObject ButtonsPanel = null;
+    [SerializeField] private GameObject PauseButton = null; 
     private AudioSource SoundPlay = null;
     private Text HealthText = null;
     private Text Score = null;
@@ -33,8 +33,8 @@ public class PlayerStats : MonoBehaviour
         {
             Instantiate(DestroyAnimation, this.transform.localPosition, this.transform.localRotation);
             EndScore.text = Score.text;
-            ButtonsPanel.SetActive(false);
-            Panel.SetActive(true);
+            GameOverPanel.SetActive(true);
+            PauseButton.SetActive(false);
             SoundPlay.Stop();
             SoundPlay.PlayOneShot(GameOverSound);
             Destroy(this.gameObject);
