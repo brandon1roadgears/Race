@@ -33,7 +33,7 @@ public class SpawnBehaviour : MonoBehaviour
           new Vector2(-0.031f, 1.37f), new Vector2(0.78f, 1.37f), new Vector2(1.53f, 1.37f),
 
           new Vector2(-1.81f, 0.71f), new Vector2(-1.06f, 0.71f), new Vector2(-0.31f, 0.71f),
-          new Vector2(-0.44f, 0.71f), new Vector2(1.19f, 0.71f), new Vector2(1.94f, 0.71f),
+          new Vector2(0.44f, 0.71f), new Vector2(1.19f, 0.71f), new Vector2(1.94f, 0.71f),
 
           new Vector2(-2.22f, 0f), new Vector2(-1.47f, 0f), new Vector2(-0.72f, 0f),
           new Vector2(-0.031f, 0f), new Vector2(0.78f, 0f), new Vector2(1.53f, 0f) 
