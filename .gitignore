@@ -160,6 +160,9 @@ ExportedObj/
 *.prefab
 *.ttf
 *.mp3
+*.aab
+*.jpg
+*.keystore
 
 # Unity3D generated meta files
 *.pidb.meta
