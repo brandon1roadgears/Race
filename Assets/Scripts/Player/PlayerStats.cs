@@ -8,6 +8,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private Text EndScore = null;
     [SerializeField] private GameObject DestroyAnimation = null;
     [SerializeField] private GameObject PauseButton = null; 
+    [SerializeField] private AudioClip DamageSound = null;
     private AudioSource SoundPlay = null;
     private Text HealthText = null;
     private Text Score = null;
@@ -24,6 +25,7 @@ public class PlayerStats : MonoBehaviour
     {
         if(col.tag == "EnemyBullet")
         {
+            SoundPlay.PlayOneShot(DamageSound);
             --HealthPoint;
             byte Hp = byte.Parse(HealthText.text);
             --Hp;
