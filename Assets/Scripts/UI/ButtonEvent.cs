@@ -3,21 +3,26 @@ using UnityEngine.SceneManagement;
 
 public class ButtonEvent : MonoBehaviour
 {
-    private static bool ControlType = true;
+    private static byte ControlType = 1;
 
-    public bool GetValueOfConfiguration()
+    public byte GetValueOfConfiguration()
     {
         return ControlType;
     }
 
     public void OnControlTypeChange1()
     {
-        ControlType = true;
+        ControlType = 1;
     }
 
     public void OnControlTypeChange2()
     {
-        ControlType = false;
+        ControlType = 2;
+    }
+
+    public void OnControlTypeChange3()
+    {
+        ControlType = 3;
     }
 
     public void OnStartButtonClick()
