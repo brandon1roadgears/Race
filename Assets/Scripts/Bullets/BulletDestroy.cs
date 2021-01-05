@@ -8,15 +8,15 @@ public class BulletDestroy : MonoBehaviour
     {
         if(this.gameObject.tag == "EnemyBullet")
         {
-            Collisions = new string[] { "Player", "PlayerBullet", "Border"};
+            Collisions = new string[] { "Player", "PlayerBullet"};
         }
         else if(this.gameObject.tag == "PlayerBullet")
         {
-            Collisions = new string[] { "Enemy", "EnemyBullet", "Border" };
+            Collisions = new string[] { "Enemy", "EnemyBullet"};
         }
     }
 
-    private void OnTriggerExit2D(Collider2D col)
+    private void OnTriggerEnter2D(Collider2D col)
     {
         foreach(string i in Collisions)
         {
@@ -26,5 +26,14 @@ public class BulletDestroy : MonoBehaviour
                 return;
             }
         }
+    }
+
+    private void OnTriggerExit2D(Collider2D col)
+    {
+        if(col.tag == "Border")
+        {
+            Destroy(this.gameObject);
+        }
+
     }
 }
