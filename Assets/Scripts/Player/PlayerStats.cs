@@ -13,12 +13,13 @@ public class PlayerStats : MonoBehaviour
     private Text HealthText = null;
     private Text Score = null;
     private byte HealthPoint = 5;
-
+    private Save _Save = null;
     private void Start()
     {
         SoundPlay = GameObject.Find("Main Camera").GetComponent<AudioSource>();
         HealthText = GameObject.Find("Text(Hp_points)").GetComponent<Text>();
         Score = GameObject.Find("Text(Points)").GetComponent<Text>();
+        _Save = Camera.main.GetComponent<Save>();
     }
 
     private void OnTriggerEnter2D(Collider2D col)
@@ -39,6 +40,7 @@ public class PlayerStats : MonoBehaviour
             PauseButton.SetActive(false);
             SoundPlay.Stop();
             SoundPlay.PlayOneShot(GameOverSound);
+            _Save.SaveResult(int.Parse(Score.text));
             Destroy(this.gameObject);
         }
     }
