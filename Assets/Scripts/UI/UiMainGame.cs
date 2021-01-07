@@ -6,7 +6,7 @@ public class UiMainGame : MonoBehaviour
     [SerializeField] private GameObject Configuration2 = null;
     [SerializeField] private GameObject Configuration3 = null;
 
-    private void Start()
+    private void Awake()
     {
         ButtonEvent BE = GetComponent<ButtonEvent>();
         if(BE.GetValueOfConfiguration() == 1)
