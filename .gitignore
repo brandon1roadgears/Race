@@ -164,6 +164,7 @@ ExportedObj/
 *.aab
 *.jpg
 *.keystore
+*.json
 
 # Unity3D generated meta files
 *.pidb.meta
