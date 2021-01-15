@@ -4,39 +4,71 @@ using System.Collections;
 
 public class SpawnBehaviour : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject Invader1 = null, Invader2 = null, Invader3 = null, Ufo = null;
-    private Text ScorePoints = null;
-    private int Score = 0;
-    private bool IsCalledSpawn = true;
-    private int CountOfFreePlace = 18;
-
-    private GameObject[] Enemies = null;
-    private Vector2[] ArrayOfPositions = null, ArrayOfUfoPositions = null, ArrayEnemyWithUfo = null;
+    #region using System
+    private int Score = 0;                                                                              //Varaible for converting from Text ScorePoints to to int
+    private bool IsCalledSpawn = true;                                                                  //Variable for Waiting of Coroutines
+    private int CountOfFreePlace = 22;               
     private int[] A = null;
     private int[] B = null;
-    
     internal int CountOfEnemies = 0;
+#endregion
+
+    #region using UnityEngine
+    [SerializeField] private GameObject Invader1 = null,                                                //Objects that contains Enemies;
+                                        Invader2 = null, 
+                                        Invader3 = null, 
+                                        Ufo = null;                                                     
+
+    private GameObject[] StaticEnemies = null;                                                          //Array of non-moving invaders
+    private GameObject[] DinamicEnemies = null;                                                         //Array of moving invaders
+    private Vector2[] ArrayOfStaticEnemiesPositions = null,
+                      ArrayOfDinamicEnemiesPositions = null,
+                      ArrayOfUfoPositions = null, 
+                      ArrayEnemyWithUfo = null;
+    private Text ScorePoints = null;                                                                    //Variable required for getting points from UJ                                                   
+#endregion
 
     private void Start()
     {
+        #region GetComponents<>
+        
         ScorePoints = GameObject.Find("Text(Points)").GetComponent<Text>();
-        Enemies = new GameObject[3]
+        
+        #endregion
+
+        #region CREATING_ARRAYS_WITH_DIFFERENT_SETS_OF_INVADERS_COMBINATIONS
+
+        StaticEnemies = new GameObject[2]
         { 
             Invader1,
-            Invader2,
             Invader3
         };
-        ArrayOfPositions = new Vector2[18] 
+
+        DinamicEnemies = new GameObject[1]
+        {
+            Invader2
+        };
+
+        #endregion
+
+        #region CREATING_ARRAYS_WITH_POSITIONS_OF_INVADERS
+
+        ArrayOfStaticEnemiesPositions = new Vector2[22] 
         { 
-          new Vector2(-2.22f, 1.37f), new Vector2(-1.47f, 1.37f), new Vector2(-0.72f, 1.37f),
-          new Vector2(-0.031f, 1.37f), new Vector2(0.78f, 1.37f), new Vector2(1.53f, 1.37f),
+          new Vector2(-3.68f, 1.85f), new Vector2(-2.68f, 1.85f), new Vector2(-1.68f, 1.85f),new Vector2(-0.68f, 1.85f), 
+          new Vector2(0.32f, 1.85f), new Vector2(1.32f, 1.85f), new Vector2(2.32f, 1.85f), new Vector2(3.32f, 1.85f),
 
-          new Vector2(-1.81f, 0.71f), new Vector2(-1.06f, 0.71f), new Vector2(-0.31f, 0.71f),
-          new Vector2(0.44f, 0.71f), new Vector2(1.19f, 0.71f), new Vector2(1.94f, 0.71f),
+          new Vector2(-3.68f, 0.89f), new Vector2(-2.68f, 0.89f), new Vector2(-0.68f, 0.89f),
+          new Vector2(0.32f, 0.89f), new Vector2(2.32f, 0.89f), new Vector2(3.32f, 0.89f),
 
-          new Vector2(-2.22f, 0f), new Vector2(-1.47f, 0f), new Vector2(-0.72f, 0f),
-          new Vector2(-0.031f, 0f), new Vector2(0.78f, 0f), new Vector2(1.53f, 0f) 
+          new Vector2(-3.68f, 0.15f), new Vector2(-2.68f, 0.15f), new Vector2(-1.68f, 0.15f),new Vector2(-0.68f, 0.15f), 
+          new Vector2(0.32f, 0.15f), new Vector2(1.32f, 0.15f), new Vector2(2.32f, 0.15f), new Vector2(3.32f, 0.15f)
+        };
+
+        ArrayOfDinamicEnemiesPositions = new Vector2[8]
+        {
+            new Vector2(-3.14f, 1.37f), new Vector2(-0.14f, 1.37f), new Vector2(2.86f, 1.37f),new Vector2(-1.68f, 0.89f), 
+            new Vector2(-3.14f, 0.37f), new Vector2(-0.14f, 0.37f), new Vector2(2.86f, 0.37f), new Vector2(1.32f, 0.89f),
         };
 
         ArrayOfUfoPositions = new Vector2[3] 
@@ -52,6 +84,8 @@ public class SpawnBehaviour : MonoBehaviour
             new Vector2(0f, 0.37f),
             new Vector2(-3.02f, 1.37f)
         };
+
+        #endregion
     }
     private void Update()
     {
@@ -137,7 +171,7 @@ public class SpawnBehaviour : MonoBehaviour
         }
     }
 
-    private IEnumerator LightScript2(int CountOfUfo, int CountOfOther)
+    private IEnumerator LightScript2(int CountOfUfo, int CountOfOther)                                              /**/
     {
         yield return new WaitForSeconds(1.5f);
         for(int i = 0; i < CountOfUfo; ++i)
@@ -146,12 +180,12 @@ public class SpawnBehaviour : MonoBehaviour
         }
         for(int i = 0; i < CountOfOther; ++i)
         {
-            Instantiate(Enemies[Random.Range(0, 3)], ArrayEnemyWithUfo[i], new Quaternion(0f, 0f, 0f, 0f));
+            Instantiate(StaticEnemies[Random.Range(0, 3)], ArrayEnemyWithUfo[i], new Quaternion(0f, 0f, 0f, 0f));
         }
         IsCalledSpawn = true;
     }
 
-    private IEnumerator LightScript1(int HowMany)
+    private IEnumerator LightScript1(int HowMany)                                                                   /**/
     {
         yield return new WaitForSeconds(1.5f);
         PrepareArray();
@@ -176,7 +210,7 @@ public class SpawnBehaviour : MonoBehaviour
     private void SpawnOnRandomPlace()
     {
         int Rnd = Random.Range(0, CountOfFreePlace);
-        Instantiate(Enemies[Random.Range(0, 3)], ArrayOfPositions[B[Rnd]], new Quaternion(0f, 0f, 0f, 0f));
+        Instantiate(StaticEnemies[Random.Range(0, 3)], ArrayOfStaticEnemiesPositions[B[Rnd]], new Quaternion(0f, 0f, 0f, 0f));
         B[Rnd] = -1;
     }
 
