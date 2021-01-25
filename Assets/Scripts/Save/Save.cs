@@ -5,33 +5,27 @@ using Structs;
 public class Save : MonoBehaviour
 {    
 
-    private string _Path = "";
+    private string _PathForRecords = "";
     RecordsArray _RecordsArray;
 
     private void Awake()
     {
         #if  UNITY_ANDROID && !UNITY_EDITOR
-            _Path = Path.Combine(Application.persistentDataPath, "Save.json");
+            _PathForRecords = Path.Combine(Application.persistentDataPath, "SaveRecords.json");
         #else
-            _Path = Path.Combine(Application.dataPath, "Save.json");
+            _PathForRecords = Path.Combine(Application.dataPath, "SaveRecords.json");
         #endif
     }
-    private void Start()
+    internal void SaveResult(int Record)
     {
-        if(File.Exists(_Path))
+        if(File.Exists(_PathForRecords))
         {
-            _RecordsArray = JsonUtility.FromJson<RecordsArray>(File.ReadAllText(_Path));
+            _RecordsArray = JsonUtility.FromJson<RecordsArray>(File.ReadAllText(_PathForRecords));
         }
         else
         {
-            _RecordsArray = new RecordsArray{};
-            _RecordsArray.Records = new int[10] {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
+            return;
         }
-
-    }
-
-    internal void SaveResult(int Record)
-    {
         int LastIndex = 0;
         for(int i = 0; i < 10; ++i)
         {
@@ -46,7 +40,7 @@ public class Save : MonoBehaviour
         }
 
         _RecordsArray.Records[LastIndex] = Record;
-        File.WriteAllText(_Path, JsonUtility.ToJson(_RecordsArray, true));
+        File.WriteAllText(_PathForRecords, JsonUtility.ToJson(_RecordsArray, true));
     }
 }
 
