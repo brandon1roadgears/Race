@@ -52,5 +52,11 @@ public class Save : MonoBehaviour
         _RecordsSettings.MusicVolume = Volume;
         File.WriteAllText(_PathForSettings, JsonUtility.ToJson(_RecordsSettings, true));
     }
+
+    public void SaveChousenControlType(int NumberOfConfiguration)
+    {
+        _RecordsSettings.TypeOfControl = NumberOfConfiguration;
+        File.WriteAllText(_PathForSettings, JsonUtility.ToJson(_RecordsSettings, true));
+    }
 }
 
