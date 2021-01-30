@@ -2,13 +2,12 @@
 {
     [System.Serializable] public struct RecordsArray
     {
-        public int[]  Records;    
+        public int[]  Records;
     }
-
-    [System.Serializable] public struct Settings
+    [System.Serializable] public struct RecordsSettings
     {
-        public int TypeOfControl;
-        public float MusicVolume;
-        public float SoundsVolume;
+            public int TypeOfControl;
+            public float MusicVolume;
+            public float SoundsVolume;
     }
 }
