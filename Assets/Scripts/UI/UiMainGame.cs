@@ -1,32 +1,39 @@
 ﻿using UnityEngine;
+using Structs;
+using System.IO;
+using UnityEngine.SceneManagement;
 
 public class UiMainGame : MonoBehaviour
 {
-    [SerializeField] private GameObject Configuration1 = null;
-    [SerializeField] private GameObject Configuration2 = null;
-    [SerializeField] private GameObject Configuration3 = null;
+    [SerializeField] private GameObject[] Configurations = new GameObject[8];
+    private CreateSaveFiles _CreateSaveFiles = null;
 
-    private void Awake()
+    private void Start()
     {
-        ButtonEvent BE = GetComponent<ButtonEvent>();
-        if(BE.GetValueOfConfiguration() == 1)
-        {
-            Configuration1.SetActive(true);
-            Configuration2.SetActive(false);
-            Configuration3.SetActive(false);
-        }
-        else if(BE.GetValueOfConfiguration() == 2)
-        {
-            Configuration1.SetActive(false);
-            Configuration2.SetActive(true);
-            Configuration3.SetActive(false);
-        }
-        else if(BE.GetValueOfConfiguration() == 3)
-        {
-            Configuration1.SetActive(false);
-            Configuration2.SetActive(false);
-            Configuration3.SetActive(true);
-        }
+        _CreateSaveFiles = this.GetComponent<CreateSaveFiles>();
+        Configurations[_CreateSaveFiles._RecordsSettings.TypeOfControl].SetActive(true);
+    }
+
+    public void OnPauseButtonClick()
+    {
+        Time.timeScale = 0;
+        Configurations[_CreateSaveFiles._RecordsSettings.TypeOfControl].SetActive(false);
+    }
+
+    public void OnResumeButtonClick()
+    {
+        Time.timeScale = 1;
+        Configurations[_CreateSaveFiles._RecordsSettings.TypeOfControl].SetActive(false);
+    }
+    public void OnHomeButtonClick()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene("Menu");
+    }
+    public void OnRetryButtonCkick()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene("MainGame");
     }
 }
 
