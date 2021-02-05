@@ -6,7 +6,7 @@ public class LoadRecords : MonoBehaviour
     [SerializeField] Text [] Records = new Text[10];
     [SerializeField] private Slider MusicSlider;
     [SerializeField] private Slider SoundSlider;
-    [SerializeField] private GameObject[] ChousenConfiguration = new GameObject[8];
+    [SerializeField] private GameObject[] ChousenConfiguration = new GameObject[10];
     private CreateSaveFiles _CreateSaveFiles;
 
     void Start()
