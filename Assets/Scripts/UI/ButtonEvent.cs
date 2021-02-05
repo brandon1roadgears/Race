@@ -7,7 +7,12 @@ public class ButtonEvent : MonoBehaviour
     [SerializeField] private AudioMixer MusicMixer = null;
     [SerializeField] private AudioMixer SoundMixer = null;
     [SerializeField] private AudioClip TestSound = null;
-    [SerializeField] private AudioSource MenuListener = null;
+    private AudioSource MenuListener = null;
+
+    private void Awake()
+    {
+        MenuListener = GameObject.Find("SoundPoint").GetComponent<AudioSource>();
+    }
 
     public void SetVolumeOfMusic(float Volume)
     {
