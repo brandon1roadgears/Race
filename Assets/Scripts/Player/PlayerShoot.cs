@@ -11,7 +11,7 @@ public class PlayerShoot : MonoBehaviour
     private void Start()
     {
         ShootPoint = GameObject.Find("PlayerShootPoint").GetComponent<Transform>();
-        SoundPlay = GameObject.Find("Main Camera").GetComponent<AudioSource>();
+        SoundPlay = GameObject.Find("SoundPoint").GetComponent<AudioSource>();
     }
 
     public void ClickForShoot()
