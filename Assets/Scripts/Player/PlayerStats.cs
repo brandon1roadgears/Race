@@ -5,31 +5,34 @@ using System.Collections;
 public class PlayerStats : MonoBehaviour
 {
     [SerializeField] private AudioClip GameOverSound = null;
-    [SerializeField] private GameObject GameOverPanel = null;
-    [SerializeField] private Text EndScore = null;
-    [SerializeField] private GameObject DestroyAnimation = null;
-    [SerializeField] private GameObject PauseButton = null; 
     [SerializeField] private AudioClip DamageSound = null;
+    [SerializeField] private AudioClip ShieldOnSound = null;
+    [SerializeField] private AudioClip ShieldOnSound_reverse = null;
+    [SerializeField] private GameObject GameOverPanel = null;
+    [SerializeField] private GameObject DestroyAnimation = null;
     [SerializeField] private Sprite ClassicShipInShieldMod = null;
     [SerializeField] private Sprite ClassicShip = null;
     [SerializeField] private Animator ShieldModAnimation = null;
     [SerializeField] private Image ButtonOfShieldMod = null;
+    [SerializeField] private Text EndScore = null;
     private AudioSource SoundPlay = null;
+    private GameObject PauseButton = null;
     private Text HealthText = null;
     private Text Score = null;
-    private byte HealthPoint = 5;
     private Save _Save = null;
     private SpriteRenderer ShipSkin = null;
+    private byte HealthPoint = 5;
 
     private bool IsInShieldMod = false;
 
     private void Start()
     {
-        SoundPlay = GameObject.Find("Main Camera").GetComponent<AudioSource>();
-        HealthText = GameObject.Find("Text(Hp_points)").GetComponent<Text>();
-        Score = GameObject.Find("Text(Points)").GetComponent<Text>();
-        _Save = Camera.main.GetComponent<Save>();
-        ShipSkin = GetComponent<SpriteRenderer>();
+        SoundPlay   = GameObject.Find("SoundPoint").GetComponent<AudioSource>();
+        HealthText  = GameObject.Find("Text(Hp_points)").GetComponent<Text>();
+        Score       = GameObject.Find("Text(Points)").GetComponent<Text>();
+        PauseButton = GameObject.Find("Button(Pause)").GetComponent<GameObject>();
+        _Save       = Camera.main.GetComponent<Save>();
+        ShipSkin    = GetComponent<SpriteRenderer>();
     }
 
     private void OnTriggerEnter2D(Collider2D col)
@@ -65,6 +68,7 @@ public class PlayerStats : MonoBehaviour
         {
             ShieldModAnimation.SetBool("End", true);
             IsInShieldMod = true;
+            SoundPlay.PlayOneShot(ShieldOnSound);
             ShipSkin.sprite = ClassicShipInShieldMod;
             StartCoroutine(ReloadAnimation());
             StartCoroutine(ShieldMod());    
@@ -81,6 +85,7 @@ public class PlayerStats : MonoBehaviour
     {
         yield return new WaitForSeconds(7f);
         ShipSkin.sprite = ClassicShip;
+        SoundPlay.PlayOneShot(ShieldOnSound_reverse);
         IsInShieldMod = false;
     }
 }
