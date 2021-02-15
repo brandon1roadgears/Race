@@ -1,19 +1,19 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class FirstEnemyStats : MonoBehaviour
+public class EnemyStats : MonoBehaviour
 {
     [SerializeField] private short HealthPoint = 1;
     [SerializeField] private GameObject DestroyAnimation = null;
-    private string[] Collisions = { "PlayerBullet" };
     private Text Score = null;
     private SpawnBehaviour SpaBeh = null;
-
+    private string[] Collisions = { "PlayerBullet" };
+    internal int MyPosition = 0;
+    
     private void Start()
     {
         Score = GameObject.Find("Text(Points)").GetComponent<Text>();
-        SpaBeh = GameObject.Find("Main Camera").GetComponent<SpawnBehaviour>();
-        ++SpaBeh.CountOfEnemies;
+        SpaBeh = Camera.main.GetComponent<SpawnBehaviour>();
     }
 
     private void OnTriggerEnter2D(Collider2D col)
@@ -27,11 +27,23 @@ public class FirstEnemyStats : MonoBehaviour
         }
         if (HealthPoint == 0)
         {
-            --SpaBeh.CountOfEnemies;
             short Points = short.Parse(Score.text);
             ++Points;
             Score.text = Points.ToString();
             Instantiate(DestroyAnimation, this.transform.localPosition, this.transform.localRotation);
+            Debug.Log(this.gameObject.name[0]);
+            if(this.gameObject.name[0] == 'R')
+            {
+                SpaBeh.SetFreePlaceForLeftRightEnemies(MyPosition);
+            }
+            else if(this.gameObject.name[0] == 'U')
+            {
+                SpaBeh.SetFreePlaceForUfoEnemies(MyPosition);
+            }
+            else
+            {
+                SpaBeh.SetFreePlaceInArray(MyPosition);
+            }
             Destroy(this.gameObject);
         }
     }
