@@ -11,6 +11,8 @@ public class UfoMovement : MonoBehaviour
     {
         Dir = Random.Range(0, 2);
         UfoSpeed = Random.Range(1.5f, 5.5f);
+        LeftBorder = Camera.main.ScreenToWorldPoint(Camera.main.transform.position).x + 0.3f;
+        RightBorder = -Camera.main.ScreenToWorldPoint(Camera.main.transform.position).x - 0.3f;
     }
 
     private void FixedUpdate()
