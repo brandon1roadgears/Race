@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Enemy1Monitoring : MonoBehaviour
+public class EnemyMonitoring : MonoBehaviour
 {
     private Transform PlayerPosition = null;
 
