@@ -7,9 +7,7 @@ public class ButtonEvent : MonoBehaviour
     [SerializeField] private AudioMixer MusicMixer = null;
     [SerializeField] private AudioMixer SoundMixer = null;
     [SerializeField] private AudioClip TestSound = null;
-    //[SerializeField] GameObject[] PanelsWithEnemies = new GameObject[4];
     private AudioSource MenuListener = null;
-    //private byte CurrentEnemy = 0;
 
     private void Awake()
     {
@@ -39,33 +37,4 @@ public class ButtonEvent : MonoBehaviour
     {
         Application.Quit();
     }
-
-    /*public void OnPreviosEnemyButton()
-    {
-        if(CurrentEnemy != 0)
-        {
-            CloseCurrentEnemy();
-            --CurrentEnemy;
-            OpenCurrentEnemy();
-        }
-    }
-
-    public void OnNextEnemyButton()
-    {
-        if(CurrentEnemy != 3)
-        {
-            CloseCurrentEnemy();
-            ++CurrentEnemy;
-            OpenCurrentEnemy();
-        }
-    }
-
-    private void CloseCurrentEnemy()
-    {
-        PanelsWithEnemies[CurrentEnemy].SetActive(false);
-    }
-    private void OpenCurrentEnemy()
-    {
-        PanelsWithEnemies[CurrentEnemy].SetActive(true);
-    }*/
 }
