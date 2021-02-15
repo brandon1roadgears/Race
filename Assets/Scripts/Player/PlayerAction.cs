@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class PlayerAction : MonoBehaviour
 { 
-    private Camera Cam;
     private ButtonEvent ButEv = null;
     internal Transform MainHandle = null;
     private float playerSpeed = 5f;
@@ -12,9 +11,8 @@ public class PlayerAction : MonoBehaviour
 
     private void Awake()
     {
-        Cam = Camera.main;
-        LeftBorder = Cam.ScreenToWorldPoint(Cam.transform.position).x + 0.1f;
-        RightBorder = -Cam.ScreenToWorldPoint(Cam.transform.position).x - 0.1f;
+        LeftBorder = Camera.main.ScreenToWorldPoint(Camera.main.transform.position).x + 0.1f;
+        RightBorder = -Camera.main.ScreenToWorldPoint(Camera.main.transform.position).x - 0.1f;
         ButEv = GameObject.Find("Canvas").GetComponent<ButtonEvent>();
         if(!MainHandle) MainHandle = GetComponent<Transform>();
     }
