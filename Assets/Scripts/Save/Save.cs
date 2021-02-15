@@ -6,7 +6,7 @@ public class Save : MonoBehaviour
     private CreateSaveFiles _CreateSaveFiles;
     private void Awake()
     {
-        _CreateSaveFiles = GetComponent<CreateSaveFiles>();
+        _CreateSaveFiles = Camera.main.GetComponent<CreateSaveFiles>();
     }
 
     internal void SaveResult(int Record)
