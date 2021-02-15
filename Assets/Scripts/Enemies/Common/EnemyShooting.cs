@@ -4,8 +4,8 @@ using System.Collections;
 public class EnemyShooting : MonoBehaviour
 {
     [SerializeField] private GameObject Bullet = null;
-    private float WaitingTime = 0.0f;
     private Transform ShootPoint = null;
+    private float WaitingTime = 0.0f;
     private bool IsShooting = true;
 
     private void Start()
