@@ -165,6 +165,8 @@ ExportedObj/
 *.jpg
 *.keystore
 *.json
+*.Disabled
+*.mixer
 
 # Unity3D generated meta files
 *.pidb.meta
