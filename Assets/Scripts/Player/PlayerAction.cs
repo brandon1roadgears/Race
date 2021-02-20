@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class PlayerAction : MonoBehaviour
 { 
-    private ButtonEvent ButEv = null;
     internal Transform MainHandle = null;
     private float playerSpeed = 5f;
     private float LeftBorder = -3.26f, RightBorder = 3.26f;
@@ -13,18 +12,17 @@ public class PlayerAction : MonoBehaviour
     {
         LeftBorder = Camera.main.ScreenToWorldPoint(Camera.main.transform.position).x + 0.1f;
         RightBorder = -Camera.main.ScreenToWorldPoint(Camera.main.transform.position).x - 0.1f;
-        ButEv = GameObject.Find("Canvas").GetComponent<ButtonEvent>();
         if(!MainHandle) MainHandle = GetComponent<Transform>();
     }
 
     private void Update()
     {
-        if((MainHandle.localPosition.x <= -175 || IsMovingLeft) && this.transform.position.x > LeftBorder)
+        if((MainHandle.localPosition.x <= -120 || IsMovingLeft) && this.transform.position.x > LeftBorder)
         {
             this.transform.Translate(Vector2.left * playerSpeed * Time.fixedDeltaTime);
         }
 
-        if((MainHandle.localPosition.x >= 175 || IsMovingRight) && this.transform.position.x < RightBorder)
+        if((MainHandle.localPosition.x >= 120 || IsMovingRight) && this.transform.position.x < RightBorder)
         {
             this.transform.Translate(Vector2.right * playerSpeed * Time.fixedDeltaTime);
         }
