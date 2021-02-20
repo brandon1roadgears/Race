@@ -3,7 +3,8 @@ using UnityEngine.UI;
 
 public class EnemyStats : MonoBehaviour
 {
-    [SerializeField] private short HealthPoint = 1;
+    [SerializeField] private short HealthPoint = 0;
+    [SerializeField] private short PlusScore = 0;
     [SerializeField] private GameObject DestroyAnimation = null;
     private Text Score = null;
     private SpawnBehaviour SpaBeh = null;
@@ -28,22 +29,10 @@ public class EnemyStats : MonoBehaviour
         if (HealthPoint == 0)
         {
             short Points = short.Parse(Score.text);
-            ++Points;
+            Points += PlusScore;
             Score.text = Points.ToString();
             Instantiate(DestroyAnimation, this.transform.localPosition, this.transform.localRotation);
-            Debug.Log(this.gameObject.name[0]);
-            if(this.gameObject.name[0] == 'R')
-            {
-                SpaBeh.SetFreePlaceForLeftRightEnemies(MyPosition);
-            }
-            else if(this.gameObject.name[0] == 'U')
-            {
-                SpaBeh.SetFreePlaceForUfoEnemies(MyPosition);
-            }
-            else
-            {
-                SpaBeh.SetFreePlaceInArray(MyPosition);
-            }
+            SpaBeh.SetFreePlaceInArray(MyPosition, this.gameObject.name[0]);
             Destroy(this.gameObject);
         }
     }
