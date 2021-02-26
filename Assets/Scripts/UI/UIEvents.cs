@@ -2,6 +2,8 @@
 using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
 using UnityEngine.UI;
+using UnityEngine.Rendering.PostProcessing;
+
 
 public class UIEvents : MonoBehaviour
 {
@@ -15,6 +17,9 @@ public class UIEvents : MonoBehaviour
     [Header("MENU VARIABLES")]
     [SerializeField] private AudioClip TestSound = null;
     [SerializeField] private Text[] Records = new Text[10];
+    [SerializeField] private GameObject[] TutorialConf = new GameObject[5];
+    [SerializeField] private PostProcessVolume _PostProcessVolume = null;
+    
 
     [Header("MAINGAME VARIABLES")]
     [SerializeField] private GameObject[] Configurations = new GameObject[10];
@@ -42,6 +47,14 @@ public class UIEvents : MonoBehaviour
         }
     }
 
+    public void SetBloom(bool Value)
+    {
+        _PostProcessVolume.profile.GetSetting<Bloom>().active = Value;
+    }
+    public void SetLense(bool Value)
+    {
+        _PostProcessVolume.profile.GetSetting<LensDistortion>().active = Value;
+    }
     public void OnPlayRetryButtonClick()
     {
         Time.timeScale = 1;
@@ -54,12 +67,10 @@ public class UIEvents : MonoBehaviour
     public void OnPauseButtonClick()
     {
         Time.timeScale = 0;
-        //Configurations[_CreateSaveFiles._RecordsSettings.TypeOfControl].SetActive(false);
     }
     public void OnResumeButtonClick()
     {
         Time.timeScale = 1;
-        //Configurations[_CreateSaveFiles._RecordsSettings.TypeOfControl].SetActive(true);
     }
     public void OnHomeButtonClick()
     {
