@@ -6,23 +6,16 @@ public class PlayerStats : MonoBehaviour
 {
     [SerializeField] private AudioClip GameOverSound = null;
     [SerializeField] private AudioClip DamageSound = null;
-    [SerializeField] private AudioClip ShieldOnSound = null;
-    [SerializeField] private AudioClip ShieldOnSound_reverse = null;
     [SerializeField] private GameObject GameOverPanel = null;
     [SerializeField] private GameObject DestroyAnimation = null;
     [SerializeField] private GameObject PauseButton = null;
     [SerializeField] private GameObject ControlBlock = null;
-    [SerializeField] private Sprite ClassicShipInShieldMod = null;
-    [SerializeField] private Sprite ClassicShip = null;
-    [SerializeField] private Animator ShieldModAnimation = null;
-    [SerializeField] private Image ButtonOfShieldMod = null;
     [SerializeField] private Text EndScore = null;
     private AudioSource SoundPlay = null;
     private AudioSource MusicPlay = null;
     private Text HealthText = null;
     private Text Score = null;
     private Save _Save = null;
-    private SpriteRenderer ShipSkin = null;
     private byte HealthPoint = 5;
 
     private bool IsInShieldMod = false;
@@ -34,7 +27,6 @@ public class PlayerStats : MonoBehaviour
         HealthText  = GameObject.Find("Text(Hp_points)").GetComponent<Text>();
         Score       = GameObject.Find("Text(Points)").GetComponent<Text>();
         _Save       = GameObject.Find("Canvas").GetComponent<Save>();
-        ShipSkin    = GetComponent<SpriteRenderer>();
     }
 
     private void OnTriggerEnter2D(Collider2D col)
