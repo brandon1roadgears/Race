@@ -46,5 +46,17 @@ public class Save : MonoBehaviour
         _CreateSaveFiles._RecordsSettings.TypeOfControl = NumberOfConfiguration;
         File.WriteAllText(_CreateSaveFiles._PathForSettings, JsonUtility.ToJson(_CreateSaveFiles._RecordsSettings, true));
     }
+
+    public void SaveBloomValue(bool Value)
+    {
+        _CreateSaveFiles._RecordsSettings.isBloom = Value;
+        File.WriteAllText(_CreateSaveFiles._PathForSettings, JsonUtility.ToJson(_CreateSaveFiles._RecordsSettings, true));
+    }
+
+    public void SaveLenseValue(bool Value)
+    {
+        _CreateSaveFiles._RecordsSettings.isLense = Value;
+        File.WriteAllText(_CreateSaveFiles._PathForSettings, JsonUtility.ToJson(_CreateSaveFiles._RecordsSettings, true));
+    }
 }
 
