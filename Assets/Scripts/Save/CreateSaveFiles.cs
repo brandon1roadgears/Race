@@ -40,8 +40,8 @@ public class CreateSaveFiles : MonoBehaviour
                 TypeOfControl = 0,
                 MusicVolume = 1.0f,
                 SoundsVolume = 1.0f,
-                isBloom = true,
-                isLense = true
+                isBloom = false,
+                isLense = false
             };
             File.WriteAllText(_PathForSettings, JsonUtility.ToJson(_RecordsSettings, true));
         }
