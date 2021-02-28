@@ -8,7 +8,7 @@ using UnityEngine.Rendering.PostProcessing;
 public class UIEvents : MonoBehaviour
 {
     [Header("COMMON VARIABLES")]
-    [SerializeField] private Toggle[] Toggles = new Toggle[10];
+    [SerializeField] private Toggle[] Toggles = new Toggle[12];
     [SerializeField] private AudioMixer MusicMixer = null, SoundMixer = null;
     [SerializeField] private Slider MusicSlider = null, SoundSlider = null;
     [SerializeField] private PostProcessVolume _PostProcessVolume = null;
@@ -29,7 +29,11 @@ public class UIEvents : MonoBehaviour
         _CreateSaveFiles = this.GetComponent<CreateSaveFiles>();
         MusicSlider.value = _CreateSaveFiles._RecordsSettings.MusicVolume;
         SoundSlider.value = _CreateSaveFiles._RecordsSettings.SoundsVolume;
-        Toggles[_CreateSaveFiles._RecordsSettings.TypeOfControl].isOn = true;   
+        Toggles[_CreateSaveFiles._RecordsSettings.TypeOfControl].isOn = true;
+        Toggles[10].isOn = _CreateSaveFiles._RecordsSettings.isBloom;
+        Toggles[11].isOn = _CreateSaveFiles._RecordsSettings.isLense;
+        _PostProcessVolume.profile.GetSetting<Bloom>().active = _CreateSaveFiles._RecordsSettings.isBloom;
+        _PostProcessVolume.profile.GetSetting<LensDistortion>().active = _CreateSaveFiles._RecordsSettings.isLense;
         if(SceneManager.GetActiveScene().name == "Menu")
         {
             MenuListener = GameObject.Find("SoundPoint").GetComponent<AudioSource>();
