@@ -9,5 +9,7 @@
             public int TypeOfControl;
             public float MusicVolume;
             public float SoundsVolume;
+            public bool isBloom;
+            public bool isLense;
     }
 }
