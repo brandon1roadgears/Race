@@ -11,6 +11,7 @@ public class UIEvents : MonoBehaviour
     [SerializeField] private Toggle[] Toggles = new Toggle[10];
     [SerializeField] private AudioMixer MusicMixer = null, SoundMixer = null;
     [SerializeField] private Slider MusicSlider = null, SoundSlider = null;
+    [SerializeField] private PostProcessVolume _PostProcessVolume = null;
     private CreateSaveFiles _CreateSaveFiles = null;
     private AudioSource MenuListener = null;
 
@@ -18,7 +19,6 @@ public class UIEvents : MonoBehaviour
     [SerializeField] private AudioClip TestSound = null;
     [SerializeField] private Text[] Records = new Text[10];
     [SerializeField] private GameObject[] TutorialConf = new GameObject[5];
-    [SerializeField] private PostProcessVolume _PostProcessVolume = null;
     
 
     [Header("MAINGAME VARIABLES")]
