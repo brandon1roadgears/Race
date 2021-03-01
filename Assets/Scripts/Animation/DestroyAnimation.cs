@@ -2,16 +2,8 @@
 
 public class DestroyAnimation : MonoBehaviour
 {
-    [SerializeField] private float EndingTime = 0.0f;
-    private Animator DesAnim = null;
-
-    private void Start()
+    public void DestroyOnEnding()
     {
-        DesAnim = this.GetComponent<Animator>();
-    }
-
-    private void Update()
-    {
-        Destroy(this.gameObject, DesAnim.GetCurrentAnimatorClipInfo(0).Length - EndingTime);
+        Destroy(this.gameObject);
     }
 }
