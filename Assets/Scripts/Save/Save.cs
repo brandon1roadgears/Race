@@ -47,15 +47,9 @@ public class Save : MonoBehaviour
         File.WriteAllText(_CreateSaveFiles._PathForSettings, JsonUtility.ToJson(_CreateSaveFiles._RecordsSettings, true));
     }
 
-    public void SaveBloomValue(bool Value)
+    public void SaveIsPostProcassing(bool Value)
     {
-        _CreateSaveFiles._RecordsSettings.isBloom = Value;
-        File.WriteAllText(_CreateSaveFiles._PathForSettings, JsonUtility.ToJson(_CreateSaveFiles._RecordsSettings, true));
-    }
-
-    public void SaveLenseValue(bool Value)
-    {
-        _CreateSaveFiles._RecordsSettings.isLense = Value;
+        _CreateSaveFiles._RecordsSettings.isPostProcessing = Value;
         File.WriteAllText(_CreateSaveFiles._PathForSettings, JsonUtility.ToJson(_CreateSaveFiles._RecordsSettings, true));
     }
 }
