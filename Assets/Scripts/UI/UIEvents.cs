@@ -8,10 +8,11 @@ using UnityEngine.Rendering.PostProcessing;
 public class UIEvents : MonoBehaviour
 {
     [Header("COMMON VARIABLES")]
-    [SerializeField] private Toggle[] Toggles = new Toggle[12];
+    [SerializeField] private Toggle[] Toggles = new Toggle[11];
     [SerializeField] private AudioMixer MusicMixer = null, SoundMixer = null;
     [SerializeField] private Slider MusicSlider = null, SoundSlider = null;
-    [SerializeField] private PostProcessVolume _PostProcessVolume = null;
+    private PostProcessLayer _PostProcessLayer = null;
+    private PostProcessVolume _PostProcessVolume = null;
     private CreateSaveFiles _CreateSaveFiles = null;
     private AudioSource MenuListener = null;
 
@@ -30,10 +31,11 @@ public class UIEvents : MonoBehaviour
         MusicSlider.value = _CreateSaveFiles._RecordsSettings.MusicVolume;
         SoundSlider.value = _CreateSaveFiles._RecordsSettings.SoundsVolume;
         Toggles[_CreateSaveFiles._RecordsSettings.TypeOfControl].isOn = true;
-        Toggles[10].isOn = _CreateSaveFiles._RecordsSettings.isBloom;
-        Toggles[11].isOn = _CreateSaveFiles._RecordsSettings.isLense;
-        _PostProcessVolume.profile.GetSetting<Bloom>().active = _CreateSaveFiles._RecordsSettings.isBloom;
-        _PostProcessVolume.profile.GetSetting<LensDistortion>().active = _CreateSaveFiles._RecordsSettings.isLense;
+        _PostProcessLayer = Camera.main.GetComponent<PostProcessLayer>();
+        _PostProcessLayer.enabled = _CreateSaveFiles._RecordsSettings.isPostProcessing;
+        _PostProcessVolume = Camera.main.GetComponentInChildren<PostProcessVolume>();
+        _PostProcessVolume.enabled = _CreateSaveFiles._RecordsSettings.isPostProcessing;
+        Toggles[10].isOn = _CreateSaveFiles._RecordsSettings.isPostProcessing;
         if(SceneManager.GetActiveScene().name == "Menu")
         {
             MenuListener = GameObject.Find("SoundPoint").GetComponent<AudioSource>();
@@ -51,13 +53,10 @@ public class UIEvents : MonoBehaviour
         }
     }
 
-    public void SetBloom(bool Value)
+    public void SetVideoEffects(bool Value)
     {
-        _PostProcessVolume.profile.GetSetting<Bloom>().active = Value;
-    }
-    public void SetLense(bool Value)
-    {
-        _PostProcessVolume.profile.GetSetting<LensDistortion>().active = Value;
+        _PostProcessLayer.enabled = Value;
+        _PostProcessVolume.enabled = Value;
     }
     public void OnPlayRetryButtonClick()
     {
