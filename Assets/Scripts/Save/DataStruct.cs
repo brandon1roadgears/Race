@@ -9,5 +9,6 @@
             public int TypeOfControl;
             public float MusicVolume;
             public float SoundsVolume;
+            public bool isPostProcessing;
     }
 }

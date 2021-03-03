@@ -8,9 +8,11 @@ using UnityEngine.Rendering.PostProcessing;
 public class UIEvents : MonoBehaviour
 {
     [Header("COMMON VARIABLES")]
-    [SerializeField] private Toggle[] Toggles = new Toggle[10];
+    [SerializeField] private Toggle[] Toggles = new Toggle[11];
     [SerializeField] private AudioMixer MusicMixer = null, SoundMixer = null;
     [SerializeField] private Slider MusicSlider = null, SoundSlider = null;
+    private PostProcessLayer _PostProcessLayer = null;
+    private PostProcessVolume _PostProcessVolume = null;
     private CreateSaveFiles _CreateSaveFiles = null;
     private AudioSource MenuListener = null;
 
@@ -18,7 +20,6 @@ public class UIEvents : MonoBehaviour
     [SerializeField] private AudioClip TestSound = null;
     [SerializeField] private Text[] Records = new Text[10];
     [SerializeField] private GameObject[] TutorialConf = new GameObject[5];
-    [SerializeField] private PostProcessVolume _PostProcessVolume = null;
     
 
     [Header("MAINGAME VARIABLES")]
@@ -29,7 +30,12 @@ public class UIEvents : MonoBehaviour
         _CreateSaveFiles = this.GetComponent<CreateSaveFiles>();
         MusicSlider.value = _CreateSaveFiles._RecordsSettings.MusicVolume;
         SoundSlider.value = _CreateSaveFiles._RecordsSettings.SoundsVolume;
-        Toggles[_CreateSaveFiles._RecordsSettings.TypeOfControl].isOn = true;   
+        Toggles[_CreateSaveFiles._RecordsSettings.TypeOfControl].isOn = true;
+        _PostProcessLayer = Camera.main.GetComponent<PostProcessLayer>();
+        _PostProcessLayer.enabled = _CreateSaveFiles._RecordsSettings.isPostProcessing;
+        _PostProcessVolume = Camera.main.GetComponentInChildren<PostProcessVolume>();
+        _PostProcessVolume.enabled = _CreateSaveFiles._RecordsSettings.isPostProcessing;
+        Toggles[10].isOn = _CreateSaveFiles._RecordsSettings.isPostProcessing;
         if(SceneManager.GetActiveScene().name == "Menu")
         {
             MenuListener = GameObject.Find("SoundPoint").GetComponent<AudioSource>();
@@ -47,13 +53,10 @@ public class UIEvents : MonoBehaviour
         }
     }
 
-    public void SetBloom(bool Value)
+    public void SetVideoEffects(bool Value)
     {
-        _PostProcessVolume.profile.GetSetting<Bloom>().active = Value;
-    }
-    public void SetLense(bool Value)
-    {
-        _PostProcessVolume.profile.GetSetting<LensDistortion>().active = Value;
+        _PostProcessLayer.enabled = Value;
+        _PostProcessVolume.enabled = Value;
     }
     public void OnPlayRetryButtonClick()
     {

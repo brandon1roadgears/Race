@@ -39,7 +39,8 @@ public class CreateSaveFiles : MonoBehaviour
             {
                 TypeOfControl = 0,
                 MusicVolume = 1.0f,
-                SoundsVolume = 1.0f
+                SoundsVolume = 1.0f,
+                isPostProcessing = false
             };
             File.WriteAllText(_PathForSettings, JsonUtility.ToJson(_RecordsSettings, true));
         }

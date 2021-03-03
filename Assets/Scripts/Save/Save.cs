@@ -46,5 +46,11 @@ public class Save : MonoBehaviour
         _CreateSaveFiles._RecordsSettings.TypeOfControl = NumberOfConfiguration;
         File.WriteAllText(_CreateSaveFiles._PathForSettings, JsonUtility.ToJson(_CreateSaveFiles._RecordsSettings, true));
     }
+
+    public void SaveIsPostProcassing(bool Value)
+    {
+        _CreateSaveFiles._RecordsSettings.isPostProcessing = Value;
+        File.WriteAllText(_CreateSaveFiles._PathForSettings, JsonUtility.ToJson(_CreateSaveFiles._RecordsSettings, true));
+    }
 }
 
