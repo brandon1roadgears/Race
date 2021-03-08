@@ -6,4 +6,8 @@ public class DestroyAnimation : MonoBehaviour
     {
         Destroy(this.gameObject);
     }
+    public void SetFalseToMultiplieAnimation()
+    {
+        this.GetComponent<Animator>().SetBool("isStartMuiltiplierAnimation", false);
+    }
 }
