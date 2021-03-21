@@ -17,7 +17,7 @@ public class ScoreManager : MonoBehaviour
     }
     private void Update()
     {
-        if(Time.timeSinceLevelLoad - WhenKilled > 2f)
+        if(Time.timeSinceLevelLoad - WhenKilled > 1.7f)
         {
             CurrentMultiplier = 0;
             TxtMultiplier.enabled = false;
