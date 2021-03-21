@@ -17,12 +17,12 @@ public class PlayerAction : MonoBehaviour
 
     private void Update()
     {
-        if((MainHandle.localPosition.x <= -120 || IsMovingLeft) && this.transform.position.x > LeftBorder)
+        if((MainHandle.localPosition.x <= -40 || IsMovingLeft) && this.transform.position.x > LeftBorder)
         {
             this.transform.Translate(Vector2.left * playerSpeed * Time.fixedDeltaTime);
         }
 
-        if((MainHandle.localPosition.x >= 120 || IsMovingRight) && this.transform.position.x < RightBorder)
+        if((MainHandle.localPosition.x >= 40 || IsMovingRight) && this.transform.position.x < RightBorder)
         {
             this.transform.Translate(Vector2.right * playerSpeed * Time.fixedDeltaTime);
         }
