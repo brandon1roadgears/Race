@@ -9,7 +9,6 @@ public class DocHeal : MonoBehaviour
     private void Start()
     {
         line = this.GetComponent<LineRenderer>();
-        StartCoroutine(FindToHeal(0f));
     }
     private void Update()
     {
@@ -30,6 +29,7 @@ public class DocHeal : MonoBehaviour
         for(int i = 0; i < AbleLength; ++i)
         {
             EnemiesToHeal[i] = FreeEnemies[i];
+            EnemiesToHeal[i].GetComponent<EnemyStats>().HealingFromDoc();
         }
         isFindingEnemiesToHeal = true;
     }
