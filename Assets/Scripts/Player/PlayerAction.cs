@@ -4,15 +4,18 @@ public class PlayerAction : MonoBehaviour
 { 
     internal Transform MainHandle = null;
     private float playerSpeed = 5f;
-    private float LeftBorder = -3.26f, RightBorder = 3.26f;
+    private float LeftBorder = -0.0f, RightBorder = 0.0f;
     private bool IsMovingLeft = false;
     private bool IsMovingRight = false;
 
     private void Awake()
     {
-        LeftBorder = Camera.main.ScreenToWorldPoint(Camera.main.transform.position).x + 0.1f;
+        LeftBorder  = Camera.main.ScreenToWorldPoint(Camera.main.transform.position).x + 0.1f;
         RightBorder = -Camera.main.ScreenToWorldPoint(Camera.main.transform.position).x - 0.1f;
-        if(!MainHandle) MainHandle = GetComponent<Transform>();
+        if(!MainHandle)
+        {
+            MainHandle = GetComponent<Transform>();
+        }
     }
 
     private void Update()
