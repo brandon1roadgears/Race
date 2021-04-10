@@ -1,43 +1,48 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
-
+using ScriptablePlayerStatsObject;
 public class PlayerStats : MonoBehaviour
 {
-    [SerializeField] private AudioClip GameOverSound = null;
-    [SerializeField] private AudioClip DamageSound = null;
+    [SerializeField] private PlayerStatsScOb _PlayerStats = null;
     [SerializeField] private GameObject GameOverPanel = null;
-    [SerializeField] private GameObject DestroyAnimation = null;
     [SerializeField] private GameObject PauseButton = null;
     [SerializeField] private GameObject ControlBlock = null;
     [SerializeField] private Text EndScore = null;
-    private AudioSource SoundPlay = null;
-    private AudioSource MusicPlay = null;
+    private PlayerParameters _PlayerParameters = null;
     private Text HealthText = null;
     private Text Score = null;
-    private Save _Save = null;
-    private byte HealthPoint = 5;
+    private Save _Save = null;   
+    private GameObject DestroyAnimation = null;
+    private Color DestroyColor;
+    private Sprite ShipSkin = null;
+    private int HealthPoint = 0;
+    private string[] Collisions;
 
-    private bool IsInShieldMod = false;
-
-    private void Start()
+    private void Awake()
     {
-        SoundPlay   = GameObject.Find("SoundPoint").GetComponent<AudioSource>();
-        MusicPlay   = Camera.main.GetComponent<AudioSource>();
         HealthText  = GameObject.Find("Text(Hp_points)").GetComponent<Text>();
         Score       = GameObject.Find("Text(Points)").GetComponent<Text>();
         _Save       = GameObject.Find("Canvas").GetComponent<Save>();
-    }
+        _PlayerParameters = this.GetComponent<PlayerParameters>();
 
+        ShipSkin = _PlayerStats.shipSkin;
+        HealthPoint = _PlayerStats.healthPoint;
+        DestroyColor = _PlayerStats.destroyColor;
+        DestroyAnimation = _PlayerStats.destroyAnimation;
+        Collisions = _PlayerStats.collisions;
+
+        this.gameObject.AddComponent<SpriteRenderer>().sprite = ShipSkin;
+    }
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if(col.tag == "EnemyBullet" && !IsInShieldMod)
+        foreach(string i in Collisions)
         {
-            SoundPlay.PlayOneShot(DamageSound);
-            --HealthPoint;
-            byte Hp = byte.Parse(HealthText.text);
-            --Hp;
-            HealthText.text = Hp.ToString();
+            if(col.tag == i)
+            {
+                _PlayerParameters.soundPlay.PlayOneShot(_PlayerParameters.damageSound);
+                --HealthPoint;
+                HealthText.text = HealthPoint.ToString();
+            }
         }
         if(HealthPoint == 0)
         {
@@ -46,12 +51,17 @@ public class PlayerStats : MonoBehaviour
             GameOverPanel.SetActive(true);
             ControlBlock.SetActive(true);
             PauseButton.SetActive(false);
-            MusicPlay.Stop();
-            SoundPlay.PlayOneShot(GameOverSound);
+            _PlayerParameters.musicPlay.Stop();
+            _PlayerParameters.soundPlay.PlayOneShot(_PlayerParameters.gameOverSound);
             _Save.SaveResult(int.Parse(Score.text));
             Time.timeScale = 0;
             Destroy(this.gameObject);
         }
+    }
+
+    internal PlayerStatsScOb playerStatsScOb
+    {
+        get {return _PlayerStats;}
     }
 }
  
