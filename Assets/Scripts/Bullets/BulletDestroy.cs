@@ -4,15 +4,19 @@ public class BulletDestroy : MonoBehaviour
 {
     private string[] Collisions = null;
 
-    private void Start()
+    private void Awake()
     {
-        if(this.gameObject.tag == "EnemyBullet")
+        if(this.tag == "EnemyBullet")
         {
             Collisions = new string[] { "Player", "PlayerBullet"};
         }
-        else if(this.gameObject.tag == "PlayerBullet")
+        else if(this.tag == "PlayerBullet")
         {
-            Collisions = new string[] { "Enemy", "EnemyBullet"};
+            Collisions = new string[] { "Enemy", "EnemyBullet", "EnemyDoc", "Block", "Shreder"};
+        }
+        else if(this.tag == "Rocket")
+        {
+            Collisions = new string[] {"Player", "AutoTarget"};
         }
     }
 
@@ -34,6 +38,5 @@ public class BulletDestroy : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-
     }
 }
